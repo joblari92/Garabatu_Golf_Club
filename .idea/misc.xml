@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/ic_logo_svg_2.xml" value="0.362962962962963" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/newsplashscreen.xml" value="0.362962962962963" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/pruebasplashscreen.xml" value="0.362962962962963" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/splashscreen.xml" value="0.362962962962963" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/activity_main.xml" value="0.2803442028985507" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/splashscreen.xml" value="0.2803442028985507" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.362962962962963" />
       </map>
     </option>
