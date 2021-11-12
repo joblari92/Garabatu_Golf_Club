@@ -29,6 +29,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    // Habilitamos viewBinding para mejorar el acceso a los elementos de las vistas
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
