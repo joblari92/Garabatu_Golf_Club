@@ -6,13 +6,144 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Space
+            android:id="@+id/espacioSuperior"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/inicioSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inicia sesión"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/inicioSesion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="o"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/inicioSesion3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="regístrate"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <Space
+            android:id="@+id/espacioInicioCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:ems="10"
+            android:hint="correo electrónico"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textAlignment="center" />
+
+        <Space
+            android:id="@+id/espacioCorreoPassword"
+            android:layout_width="match_parent"
+            android:layout_height="11dp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="contraseña"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="20dp"/>
+
+        <Space
+            android:id="@+id/espacioLayoutHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="registrar" />
+
+            <Button
+                android:id="@+id/inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:text="entrar" />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/espacioLayouts"
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <android.widget.Button
+            android:id="@+id/googleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/boton_google"
+            android:drawableStart="@mipmap/ic_google"
+            android:paddingLeft="20dp"
+            android:text="google"
+            android:textAlignment="textStart"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="30dp"
+            />
+
+        <Space
+            android:id="@+id/espacioGoogleFace"
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <android.widget.Button
+            android:id="@+id/facebookButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/boton_facebook"
+            android:drawableStart="@mipmap/ic_facebook"
+            android:paddingLeft="20dp"
+            android:text="facebook"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
