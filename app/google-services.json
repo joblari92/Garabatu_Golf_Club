@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "416706990108",
+    "project_id": "garabatu-golf-club-d9cf3",
+    "storage_bucket": "garabatu-golf-club-d9cf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416706990108:android:14888605dc4d6f64db4fd9",
+        "android_client_info": {
+          "package_name": "com.example.garabatugolfclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416706990108-cfhst7tojvh3rlpmv9io60b2sosoj0ob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.garabatugolfclub",
+            "certificate_hash": "f2a8145430dbf75502f4e7e55ae145ffe04bd735"
+          }
+        },
+        {
+          "client_id": "416706990108-aj4mmj680a5q3d6qh24ik2ikiftbt88j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6-W9u50sm_SusAj-nCCm2tFSccCvbdmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416706990108-aj4mmj680a5q3d6qh24ik2ikiftbt88j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        //Thread.sleep(2000)
+        Thread.sleep(2000)
         /**
          * Dejamos un tiempo, aunque puede que
          * no sea necesario,para que se muestre
