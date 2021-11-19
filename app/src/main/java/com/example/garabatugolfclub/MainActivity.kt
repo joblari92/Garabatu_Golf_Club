@@ -13,6 +13,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.security.MessageDigest
@@ -55,15 +56,22 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        binding.inicio.setOnClickListener {
+            if (binding.email.text.contains("@") && binding.password.text.isNotEmpty()){
+                signIn(binding.email.text.toString(),binding.password.text.toString())
+            }else{
+                Toast.makeText(baseContext,"Datos de inicio no válidos",Toast.LENGTH_SHORT).show()
+            }
+        }
 
-        //generateFBKey() //Utilizamos esta función para obtener el hash que nos
-                        //permita iniciar sesión con Facebook
+
+
     }
 
 
-    private fun reload() {
+    /*private fun reload() {
         TODO()
-    }
+    }*/
 
     /*Comprobamos si el usuario ya ha iniciado sesión, de ser así
          *cargamos la siguiente activity con la función reload*/
@@ -78,27 +86,46 @@ class MainActivity : AppCompatActivity() {
     /*Función de registro de nuevos usuarios*/
     private fun createAccount(email: String, password: String) {
 
-        auth.createUserWithEmailAndPassword(email,
-        password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d("reg.exi.", "signInWithEmail:success")
+                    Log.d("logIn success", "signInWithEmail:success")
                     val user = auth.currentUser
                     Toast.makeText(baseContext, "Usuario registrado",
                         Toast.LENGTH_SHORT).show()
                     //reload()
                 } else {
-                    Log.w("fail.reg", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
+                    Log.w("logIn fail", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Registro fallido",
                         Toast.LENGTH_SHORT).show()
                 }
             }
+    }
 
+    /*Función de inicio de sesión*/
+    private fun signIn(email: String, password: String) {
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+
+                    Log.d("signIn success", "signInWithEmail:success")
+                    val user = auth.currentUser
+                    Toast.makeText(baseContext, "Sesión iniciada",
+                        Toast.LENGTH_SHORT).show()
+                } else {
+                    Log.w("signIn fail", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Inicio de sesión fallido",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
 
+    /*Utilizamos esta función para obtener el hash que nos
+     *permita iniciar sesión con Facebook, pudiendo encontrarlo en el Logcat
 
-    /*fun generateFBKey () {
+    fun generateFBKey () {
         try {
             val info = packageManager.getPackageInfo (
                 "com.example.garabatugolfclub",
