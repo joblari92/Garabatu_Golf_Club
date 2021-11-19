@@ -67,13 +67,13 @@ class MainActivity : AppCompatActivity() {
 
     /*Comprobamos si el usuario ya ha iniciado sesión, de ser así
          *cargamos la siguiente activity con la función reload*/
-    public override fun onStart() {
+    /*public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser != null){
             reload();
         }
-    }
+    }*/
 
     /*Función de registro de nuevos usuarios*/
     private fun createAccount(email: String, password: String) {
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     Toast.makeText(baseContext, "Usuario registrado",
                         Toast.LENGTH_SHORT).show()
-                    reload()
+                    //reload()
                 } else {
                     Log.w("fail.reg", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
