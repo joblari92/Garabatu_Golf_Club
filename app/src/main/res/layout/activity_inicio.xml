@@ -6,21 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".Inicio">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
-        <TextView
-            android:id="@+id/jugador"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Jugador"
-            android:textAlignment="textEnd"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"/>
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
