@@ -12,6 +12,7 @@ import com.example.garabatugolfclub.databinding.ActivityMainBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.auth.api.Auth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -44,9 +45,10 @@ class MainActivity : AppCompatActivity() {
          * en todas las que vayamos a crear.
          */
 
-        // Inicializamos Firebase Auth
+        /*Inicializamos Firebase Auth*/
         auth = Firebase.auth
 
+        /*Acción al pulsar el botón REGISTRO*/
         binding.registro.setOnClickListener {
             if (binding.email.text.contains("@") && binding.password.text.isNotEmpty()){
                 createAccount(binding.email.text.toString(),binding.password.text.toString())
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        /*Acción al pulsar el botón INICIO*/
         binding.inicio.setOnClickListener {
             if (binding.email.text.contains("@") && binding.password.text.isNotEmpty()){
                 signIn(binding.email.text.toString(),binding.password.text.toString())
@@ -66,6 +69,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 
@@ -93,6 +100,8 @@ class MainActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     Toast.makeText(baseContext, "Usuario registrado",
                         Toast.LENGTH_SHORT).show()
+                    val i = Intent(this, Inicio::class.java)
+                    startActivity(i)
                     //reload()
                 } else {
                     Log.w("logIn fail", "signInWithEmail:failure", task.exception)
@@ -108,11 +117,12 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-
                     Log.d("signIn success", "signInWithEmail:success")
                     val user = auth.currentUser
                     Toast.makeText(baseContext, "Sesión iniciada",
                         Toast.LENGTH_SHORT).show()
+                    val i = Intent(this, Inicio::class.java)
+                    startActivity(i)
                 } else {
                     Log.w("signIn fail", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Inicio de sesión fallido",
