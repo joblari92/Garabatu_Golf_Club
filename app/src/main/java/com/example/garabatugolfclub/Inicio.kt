@@ -21,4 +21,5 @@ class Inicio : AppCompatActivity() {
         var userEmail = Firebase.auth.currentUser?.email
         binding.emailUsuario.text = userEmail.toString()
     }
+
 }

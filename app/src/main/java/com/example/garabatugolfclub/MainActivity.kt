@@ -13,8 +13,12 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.security.MessageDigest
@@ -23,6 +27,7 @@ import java.security.NoSuchAlgorithmException
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
+    private val GOOGLE_SIGN_IN = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -67,17 +72,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        /*Acción al pulsar el botón de GOOGLE*/
+        binding.googleButton.setOnClickListener {
+            //Configuración
+            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            val googleClient = GoogleSignIn.getClient(this,googleConf)
+            googleClient.signOut() //Cerrará la sesión actual para poder autenticarnos con otra
+                                    // en caso de tener varias cuentas de Google en el dispositivo
+            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+
+        }
+
 
 
     }
 
     override fun onDestroy() {
+
         super.onDestroy()
     }
 
 
     /*private fun reload() {
-        TODO()
+        val i = Intent(this, Inicio::class.java)
+                    startActivity(i)
     }*/
 
     /*Comprobamos si el usuario ya ha iniciado sesión, de ser así
@@ -127,6 +149,41 @@ class MainActivity : AppCompatActivity() {
                     Log.w("signIn fail", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Inicio de sesión fallido",
                         Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+    /*Lo utilizaremos para iniciar sesión con Google*/
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GOOGLE_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                Log.d("signIn success", "firebaseAuthWithGoogle:" + account.email)
+                firebaseAuthWithGoogle(account.idToken!!)
+                val user = auth.currentUser
+
+                val i = Intent(this, Inicio::class.java)
+                startActivity(i)
+                if (user != null) {
+                    Toast.makeText(baseContext, "Sesión iniciada" + " " + user.email,
+                        Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: ApiException) {
+                Log.w("signIn fail", "Google sign in failed", e)
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d("signIn success", "signInWithCredential:success")
+                } else {
+                    Log.w("signIn fail", "signInWithCredential:failure", task.exception)
                 }
             }
     }
