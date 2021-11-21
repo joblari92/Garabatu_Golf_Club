@@ -14,13 +14,13 @@
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
-            android:id="@+id/jugador"
+            android:id="@+id/emailUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Jugador"
+            android:text="Email Usuario"
             android:textAlignment="textEnd"
             android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
