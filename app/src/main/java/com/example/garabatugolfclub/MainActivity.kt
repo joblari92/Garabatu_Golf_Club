@@ -9,6 +9,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.garabatugolfclub.databinding.ActivityMainBinding
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -16,6 +21,7 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -28,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private val GOOGLE_SIGN_IN = 100
+    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -89,6 +96,53 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        /*Acción al pulsar el botón de FACEBOOK
+        * IMPORTANTE: al estar la aplicación en desarrollo y así reflejarse en la web de
+        * desarrollo de Facebook, solo se puede acceder mediante los usuarios autorizados.
+        * En este caso el usuario es open_whyrssc_user@tfbnw.net y la contraseña Garabatugolfclub2021*/
+        binding.facebookButton.setOnClickListener {
+
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+
+            LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult> {
+
+                override fun onSuccess(result: LoginResult?) {
+
+                    result?.let {
+
+                        val token = it.accessToken
+
+                        val credential = FacebookAuthProvider.getCredential(token.token)
+                        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                Log.d("signIn success", "signInWithEmail:success")
+                                val user = auth.currentUser
+                                Toast.makeText(baseContext, "Sesión iniciada",
+                                    Toast.LENGTH_SHORT).show()
+                                LaunchActivityInicio()
+                            } else {
+                                Log.w("signIn fail", "signInWithEmail:failure", it.exception)
+                                Toast.makeText(baseContext, "Inicio de sesión fallido",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                }
+
+                override fun onCancel() {
+
+                }
+
+                override fun onError(error: FacebookException?) {
+                    Toast.makeText(baseContext, "Inicio de sesión fallido",
+                        Toast.LENGTH_SHORT).show()
+                }
+            })
+
+
+        }
 
 
     }
@@ -117,6 +171,11 @@ class MainActivity : AppCompatActivity() {
             reload();
         }
     }*/
+
+    private fun LaunchActivityInicio(){
+        val i = Intent(this,Inicio::class.java)
+        startActivity(i)
+    }
 
     /*Función de registro de nuevos usuarios*/
     private fun createAccount(email: String, password: String) {
@@ -162,6 +221,9 @@ class MainActivity : AppCompatActivity() {
 
     /*Lo utilizaremos para iniciar sesión con Google*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == GOOGLE_SIGN_IN) {

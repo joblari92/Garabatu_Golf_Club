@@ -55,7 +55,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx' //Implementación de Firebase
     implementation 'com.google.firebase:firebase-auth-ktx' //Implementación sistema de autenticación
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0' //Implementación sistema de autenticación
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)' //Autentitación con Facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+    implementation 'com.facebook.android:facebook-login:[8.2)'//Autentitación con Facebook
     implementation 'com.google.android.gms:play-services-auth:19.2.0' //Autenticación con Google
 
 }
