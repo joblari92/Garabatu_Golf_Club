@@ -81,8 +81,10 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
             val googleClient = GoogleSignIn.getClient(this,googleConf)
+
             googleClient.signOut() //Cerrará la sesión actual para poder autenticarnos con otra
-                                    // en caso de tener varias cuentas de Google en el dispositivo
+            // en caso de tener varias cuentas de Google en el dispositivo
+
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
         }
@@ -95,6 +97,10 @@ class MainActivity : AppCompatActivity() {
 
         super.onDestroy()
     }
+
+
+
+    /*----------------------------------------FUNCIONES------------------------------------------*/
 
 
     /*private fun reload() {
@@ -152,6 +158,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
+
+
     /*Lo utilizaremos para iniciar sesión con Google*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -159,33 +167,28 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == GOOGLE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account = task.getResult(ApiException::class.java)!!
-                Log.d("signIn success", "firebaseAuthWithGoogle:" + account.email)
-                firebaseAuthWithGoogle(account.idToken!!)
-                val user = auth.currentUser
-
-                val i = Intent(this, Inicio::class.java)
-                startActivity(i)
-                if (user != null) {
-                    Toast.makeText(baseContext, "Sesión iniciada" + " " + user.email,
-                        Toast.LENGTH_SHORT).show()
+                val account = task.getResult(ApiException::class.java)
+                if(account != null) {
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                        if (task.isSuccessful) {
+                            Log.d("signIn success", "signInWithEmail:success")
+                            val user = auth.currentUser
+                            Toast.makeText(baseContext, "Sesión iniciada",
+                                Toast.LENGTH_SHORT).show()
+                            val i = Intent(this, Inicio::class.java)
+                            startActivity(i)
+                        } else {
+                            Log.w("signIn fail", "signInWithEmail:failure", task.exception)
+                            Toast.makeText(baseContext, "Inicio de sesión fallido",
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             } catch (e: ApiException) {
                 Log.w("signIn fail", "Google sign in failed", e)
             }
         }
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d("signIn success", "signInWithCredential:success")
-                } else {
-                    Log.w("signIn fail", "signInWithCredential:failure", task.exception)
-                }
-            }
     }
 
 
