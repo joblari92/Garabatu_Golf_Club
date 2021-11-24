@@ -18,8 +18,8 @@ class Inicio : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        var userEmail = Firebase.auth.currentUser?.email
-        binding.emailUsuario.text = userEmail.toString()
+        /*var userEmail = Firebase.auth.currentUser?.email
+        binding.emailUsuario.text = userEmail.toString()*/
     }
 
 }
