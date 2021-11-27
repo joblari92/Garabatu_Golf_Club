@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/activity_home"
         android:enabled="true"
         android:icon="@drawable/boton_home"
-        android:title="home"/>
+        android:title="Inicio"
+        android:iconTint="@color/black"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/activity_historial"
         android:enabled="true"
         android:icon="@drawable/boton_historial"
-        android:title="historial"/>
+        android:title="Historial"
+        android:iconTint="@color/black"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/activity_stats"
         android:enabled="true"
         android:icon="@drawable/boton_stats"
-        android:title="stats"/>
+        android:title="Estadísticas"
+        android:iconTint="@color/black"/>
 </menu>
