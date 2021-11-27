@@ -23,6 +23,7 @@ class Inicio : AppCompatActivity() {
 
     /*Instanciamos la clase usuario*/
     val usuario = Usuario(Firebase.auth.currentUser?.email.toString())
+    val campos = Campos(Firebase.auth.currentUser?.email.toString())
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +51,11 @@ class Inicio : AppCompatActivity() {
         if (Firebase.auth.currentUser != null) {
             Log.d("existeUsuario", "Usuario en uso " + Firebase.auth.currentUser?.email)
             usuario.registrarUsuario()
+            //Registro de campos para el usuario actual
+            campos.crearCampos()
         }
+
+
     }
 
 
