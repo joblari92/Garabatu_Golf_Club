@@ -6,21 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".Inicio">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/emailUsuario"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email Usuario"
-            android:textAlignment="textEnd"
-            android:paddingRight="20dp"
+            android:orientation="horizontal"
+            android:gravity="right"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:paddingRight="20dp">
+
+
+            <ImageButton
+                android:id="@+id/botonUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/boton_usuario"
+                android:background="@drawable/boton_redondo"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonNuevaPartida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="300dp"
+                android:height="300dp"
+                android:text="NUEVA PARTIDA"
+                android:textSize="40dp"
+                app:cornerRadius="400dp"
+                android:backgroundTint="@color/secondaryColor"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <!--<ImageButton
+                android:id="@+id/botonHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/secondaryColor"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/boton_home" />
+
+            <ImageButton
+                android:id="@+id/botonHistorial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/secondaryColor"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/boton_historial" />
+
+            <ImageButton
+                android:id="@+id/botonStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/secondaryColor"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/boton_stats" />-->
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/bottom_navigation_menu"
+                android:background="@color/secondaryColor"/>
+        </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,16 +5,27 @@
       <map>
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/borde_redondo.xml" value="0.3828125" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/boton_facebook.xml" value="0.3828125" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/boton_historial.xml" value="0.3828125" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/boton_home.xml" value="0.3828125" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/boton_redondo.xml" value="0.3828125" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/boton_stats.xml" value="0.3828125" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/boton_usuario.xml" value="0.3828125" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/ic_logo_svg_2.xml" value="0.362962962962963" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/ic_outline_pie_chart_24.xml" value="0.3828125" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/newsplashscreen.xml" value="0.362962962962963" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/pruebasplashscreen.xml" value="0.362962962962963" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/drawable/splashscreen.xml" value="0.362962962962963" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.23560910307898258" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout-w936dp/activity_login.xml" value="0.275" />
-        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/activity_inicio.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/activity_inicio.xml" value="0.33" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/activity_main.xml" value="0.2803442028985507" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/activity_seleccion_tarjeta.xml" value="0.33" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/popup_campo.xml" value="0.29528985507246375" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/popup_campos.xml" value="0.29528985507246375" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/popup_usuario.xml" value="0.33" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/layout/splashscreen.xml" value="0.2803442028985507" />
+        <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/yulen/AndroidStudioProjects/GarabatuGolfClub/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.362962962962963" />
       </map>
     </option>
