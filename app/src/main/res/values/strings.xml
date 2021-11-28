@@ -3,4 +3,10 @@
     <string name="facebook_app_id">1710783245778571</string>
     <string name="fb_login_protocol_scheme">fb1710783245778571</string>
 
+    <string-array name="campos">
+        <item>La Llorea</item>
+        <item>Nestares</item>
+        <item>Llanes</item>
+    </string-array>
+
 </resources>
