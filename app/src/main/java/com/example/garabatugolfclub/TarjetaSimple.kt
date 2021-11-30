@@ -22,6 +22,7 @@ class TarjetaSimple : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     val partido = Partidos(usuario)
     var hoyo = 1
+    var puntos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GarabatuGolfClub)
@@ -73,8 +74,15 @@ class TarjetaSimple : AppCompatActivity() {
                                     hoyo.toString(),
                                     idPartido.toString()
                                 ) //Guardamos el número de golpes
+
+                            var par = binding.parHoyo.text.toString().toInt()
+                            var golpes = binding.golpes.text.toString().toInt()
+                            puntos(par, golpes)
                             if(hoyo == 18){//Cuando lleguemos al último hoyo pasamos al resumen del partido
+                                partido.setResultado(puntos.toString(),idPartido)
                                 val i = Intent(this, ResumenTarjeta::class.java)
+                                i.putExtra("campoSeleccionado",campoSeleccionado)
+                                i.putExtra("idPartido",idPartido)
                                 startActivity(i)
                             }else {
                                 hoyo++
@@ -83,6 +91,7 @@ class TarjetaSimple : AppCompatActivity() {
                         })
                         builder.setNegativeButton("CANCELAR",null)
                         builder.show()
+
                     }
                 }
             }else {
@@ -128,6 +137,21 @@ class TarjetaSimple : AppCompatActivity() {
             Toast.makeText(this,"Pulsa atrás otra vez para salir", Toast.LENGTH_SHORT).show()
         }
         backPressedTime = System.currentTimeMillis()
+    }
+
+    //Función para asignar los puntos a cada hoyo
+    fun puntos(par:Int,golpes:Int){
+        if (par - golpes == 0){
+            puntos += 2
+        }else if (par - golpes == 1){
+            puntos += 3
+        }else if(par - golpes == 2){
+            puntos += 4
+        }else if(par - golpes == 3){
+            puntos += 5
+        }else if (par - golpes == 4){
+            puntos += 6
+        }
     }
 
 }

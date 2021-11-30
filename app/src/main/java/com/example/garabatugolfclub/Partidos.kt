@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.io.path.createTempDirectory
 
 class Partidos(val email: String) {
 
@@ -17,8 +18,7 @@ class Partidos(val email: String) {
     val simpleDateFormat = SimpleDateFormat("hh:mm:ss")
     val hora = simpleDateFormat.format(date.time) //obtenemos la hora actual
     val id = currentDate + hora
-    var par = ""
-    var handicap = ""
+
 
     fun crearPartido(campo:String,handicap:String){
         db.collection("usuarios").document(email)
@@ -30,13 +30,14 @@ class Partidos(val email: String) {
                 ,"golpes 6" to "","golpes 7" to "","golpes 8" to "","golpes 9" to ""
                 ,"golpes 10" to "","golpes 11" to "","golpes 12" to "","golpes 13" to ""
                 ,"golpes 14" to "","golpes 15" to "","golpes 16" to "","golpes 17" to ""
-                ,"golpes 18" to "",))
+                ,"golpes 18" to "", "resultado" to ""))
     }
 
     fun getIdPartido(): String {
         return id
     }
 
+    //Almacenamos cada golpe dado
     fun setGolpe(golpes:String,hoyo:String,id:String){
         var golpesHoyo: String = "golpes " + hoyo
         db.collection("usuarios").document(email)
@@ -47,5 +48,13 @@ class Partidos(val email: String) {
 
     }
 
+    //Almacenamos el total de puntos obtenidos
+    fun setResultado(puntos:String,id:String){
+        db.collection("usuarios").document(email)
+            .collection("partidos").document(id)
+            .update("resultado",puntos)
+            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully updated!") }
+            .addOnFailureListener { e -> Log.w("TAG", "Error updating document", e) }
+    }
 
 }
