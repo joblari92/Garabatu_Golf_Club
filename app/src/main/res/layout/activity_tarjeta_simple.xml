@@ -6,33 +6,144 @@
     android:layout_height="match_parent"
     tools:context=".TarjetaSimple">
 
+
     <TextView
         android:id="@+id/nombreCampo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Campo"
-        app:layout_constraintBottom_toTopOf="@+id/handicapHoyo"
+        android:gravity="center"
+        android:text="Campo"
+        android:textSize="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"/>
 
-    <TextView
-        android:id="@+id/handicapHoyo"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayoutNumHoyo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Handicap"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutHandicap"
+        app:layout_constraintTop_toBottomOf="@id/nombreCampo">
+
+        <TextView
+            android:id="@+id/hoyo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hoyo"
+            android:textSize="50dp" />
+
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/numHoyo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="50dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPar"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutHandicap"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/par"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Par"
+            android:textSize="25dp" />
+
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/parHoyo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Par"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutHandicap"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/parHoyo"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/handicap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Handicap"
+            android:textSize="25dp" />
+
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/handicapHoyo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Handicap"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBotones"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Par"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/handicapHoyo" />
+        android:layout_marginBottom="20dp">
+
+        <ImageButton
+            android:id="@+id/botonCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/boton_redondo"
+            app:srcCompat="@drawable/ic_outline_cancel_24" />
+
+        <EditText
+            android:id="@+id/golpes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:hint="GOLPES"
+            android:inputType="number"
+            android:textAlignment="center"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/botonSiguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:background="@drawable/boton_redondo"
+            app:srcCompat="@drawable/ic_outline_arrow_circle_right_24" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
