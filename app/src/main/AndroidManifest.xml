@@ -4,6 +4,9 @@
     package="com.example.garabatugolfclub">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,17 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GarabatuGolfClub">
         <activity
+            android:name=".TarjetaAvanzada"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ResumenTarjeta"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".TarjetaSimple"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SeleccionTarjeta"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Inicio"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"> <!-- Con el theme mostramos la Splashscreen -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

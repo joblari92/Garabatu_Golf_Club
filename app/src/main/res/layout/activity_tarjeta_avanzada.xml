@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TarjetaSimple">
-
+    tools:context=".TarjetaAvanzada">
 
     <TextView
         android:id="@+id/nombreCampo"
@@ -108,6 +107,27 @@
             android:textSize="25dp" />
     </LinearLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPar">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Selecciona un palo"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:id="@+id/linearLayoutBotones"
         android:layout_width="match_parent"
@@ -127,7 +147,7 @@
             android:background="@drawable/boton_redondo"
             app:srcCompat="@drawable/ic_outline_cancel_24" />
 
-        <EditText
+        <TextView
             android:id="@+id/golpes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,6 +155,7 @@
             android:hint="GOLPES"
             android:inputType="number"
             android:textAlignment="center"
+            android:textSize="25dp"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
@@ -144,6 +165,57 @@
             android:layout_marginLeft="60dp"
             android:background="@drawable/boton_redondo"
             app:srcCompat="@drawable/ic_outline_arrow_circle_right_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutBotones"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPar">
+
+        <Button
+            android:id="@+id/botonGolpe"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="Golpe" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textDistancia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Distancia"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/distancia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/botonDestino"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="Destino"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

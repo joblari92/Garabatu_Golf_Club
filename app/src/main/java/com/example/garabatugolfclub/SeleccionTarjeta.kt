@@ -71,6 +71,28 @@ class SeleccionTarjeta : AppCompatActivity() {
             }
         }
 
+        binding.tarjetaDetallada.setOnClickListener {
+            val dropdown = binding.autoCompleteTextView.text
+            val hcap = binding.handicapPartido.text
+            if(dropdown.isNotEmpty() && hcap.isNotEmpty()) {
+                val campoSeleccionado = dropdown.toString()
+                val textHandicap = hcap.toString()
+                val handicap = textHandicap.toInt()
+                if(handicap<=36) {
+                    partido.crearPartido(campoSeleccionado, textHandicap)
+                    val i = Intent(this, TarjetaAvanzada::class.java)
+                    i.putExtra("campoSeleccionado", campoSeleccionado) //Enviamos el campo
+                    //campo seleccionado al siguiente activity
+                    i.putExtra("idPartido", partido.getIdPartido())
+                    startActivity(i)
+                }else{
+                    Toast.makeText(baseContext,"Handicap inválido",Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(baseContext,"Datos imcompletos",Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
     }
 
