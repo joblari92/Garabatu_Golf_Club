@@ -183,12 +183,12 @@ class TarjetaAvanzada : AppCompatActivity() {
                 endPoint.setLongitude(longitud)
                 Log.d("gps", "Latitud: " + latitud + " Longitud: " + longitud)
                 val distance: Float = startPoint.distanceTo(endPoint)
-                binding.distancia.setText(distance.toString())
+                binding.distancia.setText(Math.round(distance).toString() + " metros")
                 binding.botonGolpe.isEnabled = true
                 binding.autoCompleteTextView.setText(null)
                 totalGolpes++
                 binding.golpes.setText(totalGolpes.toString())
-                golpe.setGolpe(campoSeleccionado.toString(),palo.toString(),distance.toString())
+                golpe.setGolpe(campoSeleccionado.toString(),palo.toString(),Math.round(distance).toString())
 
             }
         }

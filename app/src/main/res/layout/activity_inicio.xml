@@ -55,43 +55,64 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/secondaryColor">
 
-            <!--<ImageButton
-                android:id="@+id/botonHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/secondaryColor"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/boton_home" />
-
-            <ImageButton
-                android:id="@+id/botonHistorial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/secondaryColor"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/boton_historial" />
-
-            <ImageButton
-                android:id="@+id/botonStats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/secondaryColor"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/boton_stats" />-->
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:menu="@menu/bottom_navigation_menu"
-                android:background="@color/secondaryColor"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/botonHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:minHeight="48dp"
+                    android:drawableTop="@drawable/boton_home"
+                    android:text="Inicio"
+                    android:gravity="center"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/botonHistorial"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:minHeight="48dp"
+                    android:drawableTop="@drawable/boton_historial"
+                    android:text="Historial"
+                    android:gravity="center"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/botonStats"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:minHeight="48dp"
+                    android:drawableTop="@drawable/boton_stats"
+                    android:text="Stats"
+                    android:gravity="center"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
