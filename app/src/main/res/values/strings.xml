@@ -9,4 +9,20 @@
         <item>Llanes</item>
     </string-array>
 
+    <string-array name="palos">
+        <item>Drive</item>
+        <item>Madera 3</item>
+        <item>Madera 5</item>
+        <item>Put</item>
+        <item>Sand wedge</item>
+        <item>Pitching wedge</item>
+        <item>Hierro 9</item>
+        <item>Hierro 8</item>
+        <item>Hierro 7</item>
+        <item>Hierro 6</item>
+        <item>Hierro 5</item>
+        <item>Hierro 4</item>
+        <item>Hierro 3</item>
+    </string-array>
+
 </resources>
