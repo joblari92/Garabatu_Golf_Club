@@ -46,6 +46,7 @@ class TarjetaAvanzada : AppCompatActivity() {
     var hoyo = 1
     var puntos = 0
     var totalGolpes = 0
+    val golpe = Golpes(usuario)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GarabatuGolfClub)
@@ -118,6 +119,8 @@ class TarjetaAvanzada : AppCompatActivity() {
                             }else {
                                 hoyo++
                                 binding.golpes.setText(null)
+                                totalGolpes = 0
+                                binding.distancia.setText(null)
                             }
                         })
                         builder.setNegativeButton("CANCELAR",null)
@@ -155,7 +158,7 @@ class TarjetaAvanzada : AppCompatActivity() {
         getLastLocation()
         Log.d("gps","Latitud: " + latitud + " Longitud: " + longitud)
 
-
+        //lugar del GOLPE
         binding.botonGolpe.setOnClickListener {
             val dropdown = binding.autoCompleteTextView.text
             if (dropdown.isNotEmpty()) {//Primero deberemos seleccionar un palo del listado
@@ -169,7 +172,9 @@ class TarjetaAvanzada : AppCompatActivity() {
             }
         }
 
+        //DESTINO del golpe
         binding.botonDestino.setOnClickListener {
+            val palo = binding.autoCompleteTextView.text
             if(binding.botonGolpe.isEnabled == true){//Primero deberá registrarse el punto de golpeo de la bola
                 Toast.makeText(baseContext, "Registre primero el golpe", Toast.LENGTH_SHORT).show()
             }else {
@@ -183,6 +188,8 @@ class TarjetaAvanzada : AppCompatActivity() {
                 binding.autoCompleteTextView.setText(null)
                 totalGolpes++
                 binding.golpes.setText(totalGolpes.toString())
+                golpe.setGolpe(campoSeleccionado.toString(),palo.toString(),distance.toString())
+
             }
         }
 
