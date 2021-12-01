@@ -151,6 +151,8 @@ class TarjetaSimple : AppCompatActivity() {
             puntos += 5
         }else if (par - golpes == 4){
             puntos += 6
+        }else if (par - golpes == -1) {
+            puntos += 1
         }
     }
 

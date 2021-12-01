@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GarabatuGolfClub">
         <activity
+            android:name=".TarjetaAvanzada"
+            android:exported="false" />
+        <activity
             android:name=".ResumenTarjeta"
             android:exported="false" />
         <activity

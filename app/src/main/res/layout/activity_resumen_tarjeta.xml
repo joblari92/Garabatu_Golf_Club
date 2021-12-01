@@ -22,7 +22,8 @@
             android:layout_weight="1"
             android:text="CAMPO"
             android:textSize="28dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textStyle="italic"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +35,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo1"
@@ -42,15 +43,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 1"
-                    android:layout_marginRight="5dp"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp"/>
+                    android:text="TextView"/>
             </LinearLayout>
 
             <Space
@@ -60,7 +61,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo2"
@@ -68,15 +69,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 2"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
 
             <Space
@@ -86,7 +87,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo3"
@@ -94,15 +95,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 3"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
         </LinearLayout>
 
@@ -116,7 +117,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo4"
@@ -124,15 +125,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 4"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
 
             <Space
@@ -142,7 +143,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo5"
@@ -150,15 +151,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 5"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
 
             <Space
@@ -168,7 +169,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo6"
@@ -176,15 +177,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 6"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/puntos6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
         </LinearLayout>
 
@@ -198,7 +199,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo7"
@@ -206,15 +207,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 7"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp"/>
+                    android:text="TextView"/>
             </LinearLayout>
 
             <Space
@@ -224,7 +225,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo8"
@@ -232,15 +233,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 8"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
 
             <Space
@@ -250,7 +251,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo9"
@@ -258,15 +259,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 9"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
         </LinearLayout>
 
@@ -280,7 +281,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo10"
@@ -288,15 +289,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 10"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
 
             <Space
@@ -306,7 +307,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo11"
@@ -314,15 +315,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 11"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/puntos11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
 
             <Space
@@ -332,7 +333,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo12"
@@ -340,15 +341,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 12"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/puntos12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
         </LinearLayout>
 
@@ -362,7 +363,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo13"
@@ -370,15 +371,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 13"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/puntos13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView"/>
             </LinearLayout>
 
             <Space
@@ -388,7 +389,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo14"
@@ -396,15 +397,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 14"
-                    android:layout_marginRight="5dp"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/puntos14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp"/>
+                    android:text="TextView"/>
             </LinearLayout>
 
             <Space
@@ -414,7 +415,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo15"
@@ -422,15 +423,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 15"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
         </LinearLayout>
 
@@ -444,7 +445,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo16"
@@ -452,15 +453,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 16"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView"/>
             </LinearLayout>
 
             <Space
@@ -470,7 +471,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo17"
@@ -478,15 +479,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 17"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
 
             <Space
@@ -496,7 +497,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/hoyo18"
@@ -504,15 +505,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hoyo 18"
-                    android:layout_marginRight="5dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/puntos18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
-                    android:layout_marginLeft="5dp" />
+                    android:text="TextView" />
             </LinearLayout>
         </LinearLayout>
 
@@ -532,7 +533,8 @@
                 android:textSize="20dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="right"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/puntos"
                 android:layout_width="wrap_content"
