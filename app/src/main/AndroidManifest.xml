@@ -15,25 +15,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GarabatuGolfClub">
         <activity
+            android:name=".StatsCampos"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StatsPalos"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Historial"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Estadisticas"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".TarjetaAvanzada"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ResumenTarjeta"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TarjetaSimple"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SeleccionTarjeta"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Inicio"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
