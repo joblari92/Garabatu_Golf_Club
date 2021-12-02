@@ -93,6 +93,24 @@ class SeleccionTarjeta : AppCompatActivity() {
             }
         }
 
+        //---------------------------Funciones barra de menú----------------------------------------
+
+        //Botón Inicio
+        binding.botonHome.setOnClickListener {
+            val i = Intent(this, Inicio::class.java)
+            startActivity(i)
+        }
+        //Botón Historial
+        binding.botonHistorial.setOnClickListener {
+            val i = Intent(this, Historial::class.java)
+            startActivity(i)
+        }
+        //Botón Stats
+        binding.botonStats.setOnClickListener {
+            val i = Intent(this, Estadisticas::class.java)
+            startActivity(i)
+        }
+
 
     }
 
