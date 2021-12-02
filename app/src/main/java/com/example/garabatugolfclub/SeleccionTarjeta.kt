@@ -46,8 +46,6 @@ class SeleccionTarjeta : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this,R.layout.dropdown_item,campos)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
-        //Variable para almacenar el campo y poder conseguir sus datos de la BBDD
-
 
         binding.tarjetaSimple.setOnClickListener {
             val dropdown = binding.autoCompleteTextView.text

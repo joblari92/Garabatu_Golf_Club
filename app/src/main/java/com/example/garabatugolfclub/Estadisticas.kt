@@ -15,6 +15,18 @@ class Estadisticas : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        //Botón campos
+        binding.botonCampos.setOnClickListener{
+            val i = Intent(this,StatsCampos::class.java)
+            startActivity(i)
+        }
+
+        //Botón palos
+        binding.botonPalos.setOnClickListener{
+            val i = Intent(this,StatsPalos::class.java)
+            startActivity(i)
+        }
+
         //---------------------------Funciones barra de menú----------------------------------------
 
         //Botón Inicio
