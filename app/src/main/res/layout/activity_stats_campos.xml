@@ -61,13 +61,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Total de partidos" />
+                android:text="Total de partidos"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/totalPartidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0"
+                android:textSize="15dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -82,13 +85,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Máxima puntuación" />
+                android:text="Máxima puntuación"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/maxPuntuacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0"
+                android:textSize="15dp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -107,13 +113,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Puntuación Media" />
+            android:text="Puntuación Media"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/puntuacionMedia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="0"
+            android:textSize="15dp"/>
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
