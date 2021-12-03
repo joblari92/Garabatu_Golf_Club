@@ -13,11 +13,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GarabatuGolfClub">
+        android:theme="@style/Theme.GarabatuGolfClub"
+        >
         <activity
             android:name=".StatsCampos"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".StatsPalos"
             android:exported="false"

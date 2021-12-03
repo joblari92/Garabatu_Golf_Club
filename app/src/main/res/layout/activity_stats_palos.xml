@@ -67,7 +67,7 @@
                 android:id="@+id/campo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +88,7 @@
                 android:id="@+id/maxDistancia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0" />
         </LinearLayout>
 
     </LinearLayout>
@@ -113,7 +113,7 @@
             android:id="@+id/distanciaMedia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="0" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
