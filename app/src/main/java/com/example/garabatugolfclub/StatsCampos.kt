@@ -16,7 +16,7 @@ class StatsCampos : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //Desplegable en el que seleccionaremos el campo en el que vamos a jugar
+        //Desplegable en el que seleccionaremos el campo
         val campos = resources.getStringArray(R.array.campos)
         val arrayAdapter = ArrayAdapter(this,R.layout.dropdown_item,campos)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)

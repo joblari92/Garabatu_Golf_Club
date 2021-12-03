@@ -2,6 +2,7 @@ package com.example.garabatugolfclub
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import com.example.garabatugolfclub.databinding.ActivityStatsPalosBinding
 
 class StatsPalos : AppCompatActivity() {
@@ -12,5 +13,10 @@ class StatsPalos : AppCompatActivity() {
         binding = ActivityStatsPalosBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //Desplegable en el que seleccionaremos el palo
+        val palos = resources.getStringArray(R.array.palos)
+        val arrayAdapter = ArrayAdapter(this,R.layout.dropdown_item,palos)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
     }
 }
