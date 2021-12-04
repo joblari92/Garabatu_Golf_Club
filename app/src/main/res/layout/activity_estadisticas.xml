@@ -63,7 +63,8 @@
                 android:drawableTop="@drawable/boton_home"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:text="Inicio" />
+                android:text="Inicio"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -81,7 +82,8 @@
                 android:drawableTop="@drawable/boton_historial"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:text="Historial" />
+                android:text="Historial"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +101,8 @@
                 android:drawableTop="@drawable/boton_stats"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:text="Stats" />
+                android:text="Stats"
+                android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>
 

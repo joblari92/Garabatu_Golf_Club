@@ -20,14 +20,9 @@ class StatsPalos : AppCompatActivity() {
     val usuario = Firebase.auth.currentUser?.email.toString()
     val db = FirebaseFirestore.getInstance()
     var palo = ""
-    var distMaxima = -1
-    var listaDocPalo = mutableListOf<String>()
     var totalDoc = 0
     var mediaDistancias = 0
     var distanciaMax = 0
-    var listaDocLlorea = mutableListOf<String>()
-    var listaDocLlanes = mutableListOf<String>()
-    var listaDocNestares = mutableListOf<String>()
     var totalLlorea = 0
     var totalNestares = 0
     var totalLlanes = 0
@@ -61,17 +56,25 @@ class StatsPalos : AppCompatActivity() {
         //Actualizamos los datos del layout
 
         binding.botonActualizar.setOnClickListener {
-            if (totalLlorea>totalLlanes && totalLlorea>totalNestares){
-                binding.campo.setText(totalLlorea.toString())
-            }else if(totalLlanes>totalLlorea && totalLlanes>totalNestares){
-                binding.campo.setText(totalLlanes.toString())
-            }else if(totalNestares>totalLlanes && totalNestares>totalLlorea){
-                binding.campo.setText(totalNestares.toString())
+            if(distanciaMax != 0 && mediaDistancias != 0)
+            {
+                if (totalLlorea > totalLlanes && totalLlorea > totalNestares) {
+                    binding.campo.setText("La Llorea")
+                } else if (totalLlanes > totalLlorea && totalLlanes > totalNestares) {
+                    binding.campo.setText("Llanes")
+                } else if (totalNestares > totalLlanes && totalNestares > totalLlorea) {
+                    binding.campo.setText("Nestares")
+                } else {
+                    binding.campo.setText("Varios")
+                }
+                binding.maxDistancia.setText(distanciaMax.toString())
+                binding.distanciaMedia.setText(mediaDistancias.toString())
             }else{
-                binding.campo.setText("Empatados")
+                Toast.makeText(baseContext,"Sin datos",Toast.LENGTH_SHORT).show()
+                binding.maxDistancia.setText("0")
+                binding.distanciaMedia.setText("0")
+                binding.campo.setText("0")
             }
-            binding.maxDistancia.setText(distanciaMax.toString())
-            binding.distanciaMedia.setText(mediaDistancias.toString())
         }
 
         //Regresamos al menú de estadísiticas
@@ -82,7 +85,7 @@ class StatsPalos : AppCompatActivity() {
         }
     }
 
-    /*-------Añadimos a una lista todos los documentos que contienen el palo seleccionado---------*/
+    /*----------------------------------------Funciones-------------------------------------------*/
 
     fun totalDocPalo(palo:String){
         var listaDocPalo = mutableListOf<String>()
@@ -95,12 +98,15 @@ class StatsPalos : AppCompatActivity() {
         db.collection("usuarios").document(usuario).collection("golpes")
             .whereEqualTo("palo",palo).get().addOnSuccessListener { documents ->
                 for (document in documents) {
-                    listaDocPalo.add(document.toString())
-                    listaDistPalo.add((document.get("distancia") as String).toInt())
+                    listaDocPalo.add(document.toString()) //Añadimos a lista todos los documentos
+                    //coincidentes con el palo seleccionado
+                    listaDistPalo.add((document.get("distancia") as String).toInt())//Añadimos a una
+                    //lista todas las distancias del palo seleccionado
                 }
                 totalDoc = listaDocPalo.size
                 var sumaDisntacias = 0
                 var i = 0
+                //Con el bucle while obtenemos la mayor distancia alcanzada
                 while (i<listaDistPalo.size){
                     if (distanciaMax <= listaDistPalo.get(i)){
                         distanciaMax = listaDistPalo.get(i)
@@ -108,10 +114,14 @@ class StatsPalos : AppCompatActivity() {
                     sumaDisntacias += listaDistPalo.get(i)
                     i++
                 }
-                mediaDistancias = sumaDisntacias/totalDoc
+                //Calculamos la distancia media
+                if (totalDoc != 0) {
+                    mediaDistancias = sumaDisntacias / totalDoc
+                }
 
 
             }
+        //Con estas tres llamadas sabremos el número de partidos jugados en cada campo
         db.collection("usuarios").document(usuario).collection("golpes")
             .whereEqualTo("palo",palo).whereEqualTo("campo","La Llorea").get()
             .addOnSuccessListener { documents ->
