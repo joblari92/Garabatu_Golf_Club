@@ -4,63 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SeleccionTarjeta">
+    tools:context=".Estadisticas">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/botonCampos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_margin="50dp"
+        android:width="150dp"
+        android:height="150dp"
+        android:backgroundTint="@color/secondaryColor"
+        android:text="CAMPOS"
+        android:textSize="40dp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Selecciona un campo"
-            android:inputType="none" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/botonPalos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="50dp"
+        android:width="150dp"
+        android:height="150dp"
+        android:backgroundTint="@color/secondaryColor"
+        android:text="PALOS"
+        android:textSize="40dp"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/tarjetaSimple"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="tarjeta simple" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="39dp" />
-
-        <Button
-            android:id="@+id/tarjetaDetallada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="tarjeta detallada" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/secondaryColor"
@@ -84,7 +63,8 @@
                 android:drawableTop="@drawable/boton_home"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:text="Inicio" />
+                android:text="Inicio"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +82,8 @@
                 android:drawableTop="@drawable/boton_historial"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:text="Historial" />
+                android:text="Historial"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -120,21 +101,16 @@
                 android:drawableTop="@drawable/boton_stats"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:text="Stats" />
+                android:text="Stats"
+                android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/handicapPartido"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:hint="Indica tu handicap"
-        android:maxLength="2"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.43" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

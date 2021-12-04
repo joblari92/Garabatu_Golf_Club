@@ -55,6 +55,19 @@ class Inicio : AppCompatActivity() {
             campos.crearCampos()
         }
 
+        //---------------------------Funciones barra de menú----------------------------------------
+
+
+        //Botón Historial
+        binding.botonHistorial.setOnClickListener {
+            val i = Intent(this, Historial::class.java)
+            startActivity(i)
+        }
+        //Botón Stats
+        binding.botonStats.setOnClickListener {
+            val i = Intent(this, Estadisticas::class.java)
+            startActivity(i)
+        }
 
     }
 

@@ -46,8 +46,6 @@ class SeleccionTarjeta : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this,R.layout.dropdown_item,campos)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
-        //Variable para almacenar el campo y poder conseguir sus datos de la BBDD
-
 
         binding.tarjetaSimple.setOnClickListener {
             val dropdown = binding.autoCompleteTextView.text
@@ -91,6 +89,24 @@ class SeleccionTarjeta : AppCompatActivity() {
             }else{
                 Toast.makeText(baseContext,"Datos imcompletos",Toast.LENGTH_SHORT).show()
             }
+        }
+
+        //---------------------------Funciones barra de menú----------------------------------------
+
+        //Botón Inicio
+        binding.botonHome.setOnClickListener {
+            val i = Intent(this, Inicio::class.java)
+            startActivity(i)
+        }
+        //Botón Historial
+        binding.botonHistorial.setOnClickListener {
+            val i = Intent(this, Historial::class.java)
+            startActivity(i)
+        }
+        //Botón Stats
+        binding.botonStats.setOnClickListener {
+            val i = Intent(this, Estadisticas::class.java)
+            startActivity(i)
         }
 
 
