@@ -31,8 +31,6 @@ class TarjetaAvanzada : AppCompatActivity() {
     //VARIABLES GPS
     val PERMISSION_ID = 42
     lateinit var mFusedLocationClient: FusedLocationProviderClient
-    var latitud = 0.0
-    var longitud = 0.0
     val startPoint = Location("locationA")
     val endPoint = Location("locationA")
 
@@ -60,13 +58,23 @@ class TarjetaAvanzada : AppCompatActivity() {
         // de la activity anterior
         val idPartido = intent.getStringExtra("idPartido") //Recuperamos el ID del partido que se está
         //jugando para almacenar los resultados
+        val handicap = intent.getIntExtra("handicap",0)//Recuperamos el Handicap indicado por el
+        //jugador
 
         //GPS
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        //Comprobamos si las coordenadas de golpeo están guardadas
+        if(startPoint.latitude != 0.0 && startPoint.longitude != 0.0){
+            binding.botonGolpe.isEnabled = false
+        }
+        //Lanzamos la función gps una primera vez para que el usuario acepte o rechace los permisos
+        //getLastLocation()
+        //Log.d("gps","Latitud: " + latitud + " Longitud: " + longitud)
 
 
         binding.nombreCampo.setText(campoSeleccionado) //Indicamos el nombre del campo
-        binding.golpes.setText(null)
+        binding.golpes.setText(totalGolpes.toString())
+        binding.numHoyo.setText(hoyo.toString())
 
         //Recuperamos el par y handicap del hoyo 1 en el campo que seleccionamos
         if (idPartido != null && campoSeleccionado != null) {
@@ -109,7 +117,8 @@ class TarjetaAvanzada : AppCompatActivity() {
 
                             var par = binding.parHoyo.text.toString().toInt()
                             var golpes = binding.golpes.text.toString().toInt()
-                            puntos(par, golpes)
+                            var hcpHoyo = binding.handicapHoyo.text.toString().toInt()
+                            puntos(par, golpes,hcpHoyo, handicap)
                             if(hoyo == 18){//Cuando lleguemos al último hoyo pasamos al resumen del partido
                                 partido.setResultado(puntos.toString(),idPartido)
                                 val i = Intent(this, ResumenTarjeta::class.java)
@@ -118,7 +127,7 @@ class TarjetaAvanzada : AppCompatActivity() {
                                 startActivity(i)
                             }else {
                                 hoyo++
-                                binding.golpes.setText(null)
+                                binding.golpes.setText("0")
                                 totalGolpes = 0
                                 binding.distancia.setText(null)
                             }
@@ -154,19 +163,21 @@ class TarjetaAvanzada : AppCompatActivity() {
             builder.show()
         }
 
-        //Lanzamos la función gps una primera vez para que el usuario acepte o rechace los permisos
-        getLastLocation()
-        Log.d("gps","Latitud: " + latitud + " Longitud: " + longitud)
-
         //lugar del GOLPE
         binding.botonGolpe.setOnClickListener {
             val dropdown = binding.autoCompleteTextView.text
             if (dropdown.isNotEmpty()) {//Primero deberemos seleccionar un palo del listado
-                getLastLocation()
-                startPoint.setLatitude(latitud)
-                startPoint.setLongitude(longitud)
-                Log.d("gps", "Latitud: " + latitud + " Longitud: " + longitud)
-                binding.botonGolpe.isEnabled = false
+                getLastLocationA()
+                Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: " + startPoint.longitude)
+                Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: " + endPoint.longitude)
+                endPoint.latitude = 0.0
+                endPoint.longitude = 0.0
+                if(startPoint.latitude != 0.0 && startPoint.longitude != 0.0){
+                    binding.botonGolpe.isEnabled = false
+                    Toast.makeText(baseContext, "Golpe registrado", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(baseContext,"Click de nuevo para confirmar",Toast.LENGTH_SHORT).show()
+                }
             }else{
                 Toast.makeText(baseContext, "Seleccione un palo", Toast.LENGTH_SHORT).show()
             }
@@ -178,21 +189,57 @@ class TarjetaAvanzada : AppCompatActivity() {
             if(binding.botonGolpe.isEnabled == true){//Primero deberá registrarse el punto de golpeo de la bola
                 Toast.makeText(baseContext, "Registre primero el golpe", Toast.LENGTH_SHORT).show()
             }else {
-                getLastLocation()
-                endPoint.setLatitude(latitud)
-                endPoint.setLongitude(longitud)
-                Log.d("gps", "Latitud: " + latitud + " Longitud: " + longitud)
-                val distance: Float = startPoint.distanceTo(endPoint)
-                binding.distancia.setText(Math.round(distance).toString() + " metros")
-                binding.botonGolpe.isEnabled = true
-                binding.autoCompleteTextView.setText(null)
-                totalGolpes++
-                binding.golpes.setText(totalGolpes.toString())
-                golpe.setGolpe(campoSeleccionado.toString(),palo.toString(),Math.round(distance).toString())
+                getLastLocationB()
+                Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: " + startPoint.longitude)
+                Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: " + endPoint.longitude)
+                if(endPoint.latitude != 0.0 && endPoint.longitude != 0.0) {
+                    val distance: Float = startPoint.distanceTo(endPoint)
+                    binding.distancia.setText(Math.round(distance).toString() + " metros")
+                    binding.botonGolpe.isEnabled = true
+                    binding.autoCompleteTextView.setText(null)
+                    totalGolpes++
+                    binding.golpes.setText(totalGolpes.toString())
+                    golpe.setGolpe(
+                        campoSeleccionado.toString(),
+                        palo.toString(),
+                        Math.round(distance).toString()
+                    )
+                    startPoint.latitude = 0.0
+                    startPoint.longitude = 0.0
+                    Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: " + startPoint.longitude)
+                    Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: " + endPoint.longitude)
+                }else{
+                    Toast.makeText(baseContext,"Click de nuevo para confirmar",Toast.LENGTH_SHORT).show()
+                }
 
             }
         }
 
+    }
+
+    /*----------------------------------------Funciones-------------------------------------------*/
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //binding.botonGolpe.isEnabled = false
+        outState.putInt("hoyo",hoyo)
+        outState.putInt("golpes",totalGolpes)
+        outState.putDouble("spLatitude",startPoint.latitude)
+        outState.putDouble("spLongitude",startPoint.longitude)
+        outState.putBoolean("estado",binding.botonGolpe.isEnabled)
+        Log.d("saverestore","onSave hoyo " + hoyo + " totalGolpes " + totalGolpes
+        + " spLatitude " + startPoint.latitude + " spLongitude " + startPoint.longitude)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        hoyo = savedInstanceState.getInt("hoyo")
+        totalGolpes = savedInstanceState.getInt("golpes")
+        startPoint.latitude = savedInstanceState.getDouble("spLatitude")
+        startPoint.longitude = savedInstanceState.getDouble("spLongitude")
+        binding.botonGolpe.isEnabled = savedInstanceState.getBoolean("estado")
+        Log.d("saverestore","onRestore hoyo " + hoyo + " totalGolpes " + totalGolpes
+                + " spLatitude " + startPoint.latitude + " spLongitude " + startPoint.longitude)
     }
 
     /*Al pulsar dos veces seguidas en menos de dos segundos el botón atrás
@@ -213,26 +260,81 @@ class TarjetaAvanzada : AppCompatActivity() {
     }
 
     //Función para asignar los puntos a cada hoyo
-    fun puntos(par:Int,golpes:Int){
-        if (par - golpes == 0){
-            puntos += 2
-        }else if (par - golpes == 1){
-            puntos += 3
-        }else if(par - golpes == 2){
-            puntos += 4
-        }else if(par - golpes == 3){
-            puntos += 5
-        }else if (par - golpes == 4){
-            puntos += 6
-        }else if (par - golpes == -1) {
-            puntos += 1
+    fun puntos(par:Int,golpes:Int,hcpHoyo:Int,handicap:Int){
+        var gNetos: Int
+        if (handicap <= 18){
+            if (hcpHoyo <= handicap) {
+                gNetos = golpes - 1
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }else{
+                gNetos = golpes
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
+        }else {
+            if (hcpHoyo <= (handicap - 18)){
+                gNetos = golpes - 2
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }else{
+                gNetos = golpes -1
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
         }
+        Log.d("puntos","puntos " + puntos.toString() + " golpes " + golpes.toString()
+        + " handicap " + handicap.toString())
     }
 
     /*--------------------------------------FUNCIONES GPS-----------------------------------------*/
 
     @SuppressLint("MissingPermission")
-    private fun getLastLocation() {
+    private fun getLastLocationA() {
         if (checkPermissions()) {
             if (isLocationEnabled()) {
 
@@ -242,8 +344,33 @@ class TarjetaAvanzada : AppCompatActivity() {
                         requestNewLocationData()
                     } else {
                         requestNewLocationData()
-                        latitud = location.latitude
-                        longitud = location.longitude
+                        startPoint.latitude = location.latitude
+                        startPoint.longitude = location.longitude
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            requestPermissions()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLastLocationB() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+                    var location: Location? = task.result
+                    if (location == null) {
+                        requestNewLocationData()
+                    } else {
+                        requestNewLocationData()
+                        endPoint.latitude = location.latitude
+                        endPoint.longitude = location.longitude
                     }
                 }
             } else {
@@ -310,11 +437,11 @@ class TarjetaAvanzada : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_ID) {
+        /*if (requestCode == PERMISSION_ID) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 getLastLocation()
             }
-        }
+        }*/
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.garabatugolfclub
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -9,6 +10,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import com.example.garabatugolfclub.databinding.ActivityInicioBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.dialog.MaterialDialogs
@@ -21,12 +23,14 @@ import com.google.firebase.ktx.Firebase
 class Inicio : AppCompatActivity() {
     private lateinit var binding: ActivityInicioBinding
 
-    /*Instanciamos la clase usuario*/
+    /*VARIABLES*/
     val usuario = Usuario(Firebase.auth.currentUser?.email.toString())
     val campos = Campos(Firebase.auth.currentUser?.email.toString())
-
+    val PERMISSION_ID = 42
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestPermissions()
+
         setTheme(R.style.Theme_GarabatuGolfClub)
 
         super.onCreate(savedInstanceState)
@@ -71,7 +75,16 @@ class Inicio : AppCompatActivity() {
 
     }
 
+    /*--------------------------------------Funciones---------------------------------------------*/
 
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_ID
+        )
+    }
 
     override fun onDestroy() {
 

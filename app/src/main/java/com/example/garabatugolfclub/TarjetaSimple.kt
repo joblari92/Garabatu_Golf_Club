@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.garabatugolfclub.databinding.ActivityTarjetaSimpleBinding
@@ -36,6 +37,8 @@ class TarjetaSimple : AppCompatActivity() {
         // de la activity anterior
         val idPartido = intent.getStringExtra("idPartido") //Recuperamos el ID del partido que se está
         //jugando para almacenar los resultados
+        val handicap = intent.getIntExtra("handicap",0)//Recuperamos el Handicap indicado por el
+        //jugador
 
         binding.nombreCampo.setText(campoSeleccionado) //Indicamos el nombre del campo
         binding.golpes.setText(null)
@@ -77,7 +80,8 @@ class TarjetaSimple : AppCompatActivity() {
 
                             var par = binding.parHoyo.text.toString().toInt()
                             var golpes = binding.golpes.text.toString().toInt()
-                            puntos(par, golpes)
+                            var hcpHoyo = binding.handicapHoyo.text.toString().toInt()
+                            puntos(par, golpes,hcpHoyo, handicap)
                             if(hoyo == 18){//Cuando lleguemos al último hoyo pasamos al resumen del partido
                                 partido.setResultado(puntos.toString(),idPartido)
                                 val i = Intent(this, ResumenTarjeta::class.java)
@@ -122,6 +126,19 @@ class TarjetaSimple : AppCompatActivity() {
 
     }
 
+    /*--------------------------------------Funciones---------------------------------------------*/
+
+    //Almacenamos el hoyo para recuperarlo a lo largo del recorrido
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("hoyo",hoyo)
+    }
+    //Recuperamos el hoyo en el que estábamos
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        hoyo = savedInstanceState.getInt("hoyo")
+    }
+
     /*Al pulsar dos veces seguidas en menos de dos segundos el botón atrás
     * volveremos a la activity de selección de pantalla y eliminaremos los datos del partido
     * que estábamos jugando, para no tener registros incompletos en la base de datos.*/
@@ -140,20 +157,74 @@ class TarjetaSimple : AppCompatActivity() {
     }
 
     //Función para asignar los puntos a cada hoyo
-    fun puntos(par:Int,golpes:Int){
-        if (par - golpes == 0){
-            puntos += 2
-        }else if (par - golpes == 1){
-            puntos += 3
-        }else if(par - golpes == 2){
-            puntos += 4
-        }else if(par - golpes == 3){
-            puntos += 5
-        }else if (par - golpes == 4){
-            puntos += 6
-        }else if (par - golpes == -1) {
-            puntos += 1
+    fun puntos(par:Int,golpes:Int,hcpHoyo:Int,handicap:Int){
+        var gNetos: Int
+        if (handicap <= 18){
+            if (hcpHoyo <= handicap) {
+                gNetos = golpes - 1
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }else{
+                gNetos = golpes
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
+        }else {
+            if (hcpHoyo <= (handicap - 18)){
+                gNetos = golpes - 2
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }else{
+                gNetos = golpes -1
+                if (par - gNetos == 0){
+                    puntos += 2
+                }else if (par - gNetos == 1){
+                    puntos += 3
+                }else if(par - gNetos == 2){
+                    puntos += 4
+                }else if(par - gNetos == 3){
+                    puntos += 5
+                }else if (par - gNetos == 4){
+                    puntos += 6
+                }else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
         }
+        Log.d("puntos","puntos " + puntos.toString() + "golpes" + golpes.toString())
     }
 
 }

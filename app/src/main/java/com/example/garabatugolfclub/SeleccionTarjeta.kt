@@ -60,6 +60,7 @@ class SeleccionTarjeta : AppCompatActivity() {
                     i.putExtra("campoSeleccionado", campoSeleccionado) //Enviamos el campo
                     //campo seleccionado al siguiente activity
                     i.putExtra("idPartido", partido.getIdPartido())
+                    i.putExtra("handicap", handicap)
                     startActivity(i)
                 }else{
                     Toast.makeText(baseContext,"Handicap inválido",Toast.LENGTH_SHORT).show()
@@ -82,6 +83,7 @@ class SeleccionTarjeta : AppCompatActivity() {
                     i.putExtra("campoSeleccionado", campoSeleccionado) //Enviamos el campo
                     //campo seleccionado al siguiente activity
                     i.putExtra("idPartido", partido.getIdPartido())
+                    i.putExtra("handicap", handicap)
                     startActivity(i)
                 }else{
                     Toast.makeText(baseContext,"Handicap inválido",Toast.LENGTH_SHORT).show()
