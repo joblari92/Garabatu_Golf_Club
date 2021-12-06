@@ -73,8 +73,8 @@ class TarjetaAvanzada : AppCompatActivity() {
 
 
         binding.nombreCampo.setText(campoSeleccionado) //Indicamos el nombre del campo
-        binding.golpes.setText(totalGolpes.toString())
-        binding.numHoyo.setText(hoyo.toString())
+        /*binding.golpes.setText(totalGolpes.toString())
+        binding.numHoyo.setText(hoyo.toString())*/
 
         //Recuperamos el par y handicap del hoyo 1 en el campo que seleccionamos
         if (idPartido != null && campoSeleccionado != null) {
@@ -82,6 +82,8 @@ class TarjetaAvanzada : AppCompatActivity() {
                 .collection("campos").document(campoSeleccionado).get().addOnSuccessListener {
                     binding.handicapHoyo.setText(it.get("hcap " + hoyo) as String?)
                     binding.parHoyo.setText(it.get("par " + hoyo) as String?)
+                    binding.golpes.setText(totalGolpes.toString())
+                    binding.numHoyo.setText(hoyo.toString())
                 }
         }
 
@@ -174,7 +176,6 @@ class TarjetaAvanzada : AppCompatActivity() {
                 endPoint.longitude = 0.0
                 if(startPoint.latitude != 0.0 && startPoint.longitude != 0.0){
                     binding.botonGolpe.isEnabled = false
-                    Toast.makeText(baseContext, "Golpe registrado", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(baseContext,"Click de nuevo para confirmar",Toast.LENGTH_SHORT).show()
                 }
