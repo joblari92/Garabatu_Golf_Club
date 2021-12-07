@@ -120,7 +120,8 @@ class TarjetaAvanzada : AppCompatActivity() {
                             var par = binding.parHoyo.text.toString().toInt()
                             var golpes = binding.golpes.text.toString().toInt()
                             var hcpHoyo = binding.handicapHoyo.text.toString().toInt()
-                            puntos(par, golpes,hcpHoyo, handicap)
+                            partido.puntos(par, golpes,hcpHoyo, handicap,puntos)
+                            puntos = partido.getPuntos()
                             if(hoyo == 18){//Cuando lleguemos al último hoyo pasamos al resumen del partido
                                 partido.setResultado(puntos.toString(),idPartido)
                                 val i = Intent(this, ResumenTarjeta::class.java)
@@ -260,77 +261,7 @@ class TarjetaAvanzada : AppCompatActivity() {
         backPressedTime = System.currentTimeMillis()
     }
 
-    //Función para asignar los puntos a cada hoyo
-    fun puntos(par:Int,golpes:Int,hcpHoyo:Int,handicap:Int){
-        var gNetos: Int
-        if (handicap <= 18){
-            if (hcpHoyo <= handicap) {
-                gNetos = golpes - 1
-                if (par - gNetos == 0){
-                    puntos += 2
-                }else if (par - gNetos == 1){
-                    puntos += 3
-                }else if(par - gNetos == 2){
-                    puntos += 4
-                }else if(par - gNetos == 3){
-                    puntos += 5
-                }else if (par - gNetos == 4){
-                    puntos += 6
-                }else if (par - gNetos == -1) {
-                    puntos += 1
-                }
-            }else{
-                gNetos = golpes
-                if (par - gNetos == 0){
-                    puntos += 2
-                }else if (par - gNetos == 1){
-                    puntos += 3
-                }else if(par - gNetos == 2){
-                    puntos += 4
-                }else if(par - gNetos == 3){
-                    puntos += 5
-                }else if (par - gNetos == 4){
-                    puntos += 6
-                }else if (par - gNetos == -1) {
-                    puntos += 1
-                }
-            }
-        }else {
-            if (hcpHoyo <= (handicap - 18)){
-                gNetos = golpes - 2
-                if (par - gNetos == 0){
-                    puntos += 2
-                }else if (par - gNetos == 1){
-                    puntos += 3
-                }else if(par - gNetos == 2){
-                    puntos += 4
-                }else if(par - gNetos == 3){
-                    puntos += 5
-                }else if (par - gNetos == 4){
-                    puntos += 6
-                }else if (par - gNetos == -1) {
-                    puntos += 1
-                }
-            }else{
-                gNetos = golpes -1
-                if (par - gNetos == 0){
-                    puntos += 2
-                }else if (par - gNetos == 1){
-                    puntos += 3
-                }else if(par - gNetos == 2){
-                    puntos += 4
-                }else if(par - gNetos == 3){
-                    puntos += 5
-                }else if (par - gNetos == 4){
-                    puntos += 6
-                }else if (par - gNetos == -1) {
-                    puntos += 1
-                }
-            }
-        }
-        Log.d("puntos","puntos " + puntos.toString() + " golpes " + golpes.toString()
-        + " handicap " + handicap.toString())
-    }
+
 
     /*--------------------------------------FUNCIONES GPS-----------------------------------------*/
 
@@ -388,8 +319,8 @@ class TarjetaAvanzada : AppCompatActivity() {
     private fun requestNewLocationData() {
         var mLocationRequest = LocationRequest()
         mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        mLocationRequest.interval = 0
-        mLocationRequest.fastestInterval = 0
+        mLocationRequest.interval = 10000
+        mLocationRequest.fastestInterval = 5000
         mLocationRequest.numUpdates = 1
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)

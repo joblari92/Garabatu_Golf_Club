@@ -18,6 +18,7 @@ class Partidos(val email: String) {
     val simpleDateFormat = SimpleDateFormat("hh:mm:ss")
     val hora = simpleDateFormat.format(date.time) //obtenemos la hora actual
     val id = currentDate + hora
+    var puntos = 0
 
 
     fun crearPartido(campo:String,handicap:String){
@@ -55,6 +56,82 @@ class Partidos(val email: String) {
             .update("resultado",puntos)
             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully updated!") }
             .addOnFailureListener { e -> Log.w("TAG", "Error updating document", e) }
+    }
+
+    @JvmName("getPuntos1")
+    fun getPuntos(): Int{
+        return puntos
+    }
+
+    fun puntos(par:Int,golpes:Int,hcpHoyo:Int,handicap:Int,Puntos:Int) {
+        puntos = Puntos
+        var gNetos: Int
+        if (handicap <= 18) {
+            if (hcpHoyo <= handicap) {
+                gNetos = golpes - 1
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            } else {
+                gNetos = golpes
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
+        } else {
+            if (hcpHoyo <= (handicap - 18)) {
+                gNetos = golpes - 2
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            } else {
+                gNetos = golpes - 1
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
+        }
+        //Log.d("puntos","puntos " + puntos.toString() + "golpes" + golpes.toString())
     }
 
 }
