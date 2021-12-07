@@ -56,7 +56,7 @@ class StatsPalos : AppCompatActivity() {
         //Actualizamos los datos del layout
 
         binding.botonActualizar.setOnClickListener {
-            if(distanciaMax != 0 && mediaDistancias != 0)
+            if(distanciaMax != 0)
             {
                 if (totalLlorea > totalLlanes && totalLlorea > totalNestares) {
                     binding.campo.setText("La Llorea")

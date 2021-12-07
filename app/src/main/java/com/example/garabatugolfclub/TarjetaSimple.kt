@@ -13,6 +13,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class TarjetaSimple : AppCompatActivity() {
+
+    /*----------------------------------------Variables-------------------------------------------*/
+
     private lateinit var binding: ActivityTarjetaSimpleBinding
 
     //Variable para evitar salir de la activity directamente
@@ -25,6 +28,8 @@ class TarjetaSimple : AppCompatActivity() {
     var hoyo = 1
     var puntos = 0
 
+    /*-----------------------------------------onCreate-------------------------------------------*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GarabatuGolfClub)
 
@@ -33,43 +38,52 @@ class TarjetaSimple : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val campoSeleccionado = intent.getStringExtra("campoSeleccionado")//Recuperamos nombre del campo
-        // de la activity anterior
-        val idPartido = intent.getStringExtra("idPartido") //Recuperamos el ID del partido que se está
-        //jugando para almacenar los resultados
-        val handicap = intent.getIntExtra("handicap",0)//Recuperamos el Handicap indicado por el
-        //jugador
+        /*Recuperamos las variables enviadas desde la activity anterior*/
+        val campoSeleccionado = intent.getStringExtra("campoSeleccionado")
+        val idPartido = intent.getStringExtra("idPartido")
+        val handicap = intent.getIntExtra("handicap",0)
 
-        binding.nombreCampo.setText(campoSeleccionado) //Indicamos el nombre del campo
+        binding.nombreCampo.setText(campoSeleccionado)
         binding.golpes.setText(null)
 
 
         //Recuperamos el par y handicap del hoyo 1 en el campo que seleccionamos
         if (idPartido != null && campoSeleccionado != null) {
             db.collection("usuarios").document(usuario)
-                .collection("campos").document(campoSeleccionado).get().addOnSuccessListener {
+                .collection("campos").document(campoSeleccionado).get()
+                .addOnSuccessListener {
                     binding.handicapHoyo.setText(it.get("hcap " + hoyo) as String?)
                     binding.parHoyo.setText(it.get("par " + hoyo) as String?)
                 }
         }
 
-
+        //Pasamos de hoyo
         binding.botonSiguiente.setOnClickListener {
+            /*Comprobamos que haya golpes registrados*/
             if(binding.golpes.text.isNotEmpty()) {
+                /*Comprobamos que todavía no se haya acabado el recorrido*/
                 if (hoyo <= 18) {
+                    /*Comprobamos que se haya recuperado la información de la activity anterior*/
                     if (idPartido != null && campoSeleccionado != null) {
+                        /*Creamos un alert que haga que el usuario tenga que confirmar que
+                        * quiere pasar de hoyo*/
                         val builder = AlertDialog.Builder(this)
                         builder.setTitle("SIGUIENTE HOYO")
                         builder.setMessage("¿Continuar al siguiente hoyo?")
+                        /*Cuando confirme, registraremos el resultado del hoyo y pasaremos
+                        * al siguiente*/
                         builder.setPositiveButton("ACEPTAR",DialogInterface.OnClickListener{
                             dialog,which->
                             db.collection("usuarios").document(usuario)
                                 .collection("campos").document(campoSeleccionado).get()
                                 .addOnSuccessListener {
                                     if (hoyo <=18) {
-                                        binding.handicapHoyo.setText(it.get("hcap " + hoyo) as String?) //Cambiamos el handicap del hoyo
-                                        binding.parHoyo.setText(it.get("par " + hoyo) as String?) //Cambiamos el par del hoyo
-                                        binding.numHoyo.setText(hoyo.toString()) //Cambiamos el hoyo
+                                        binding.handicapHoyo.setText(it.get("hcap " + hoyo)
+                                                as String?) //Cambiamos el handicap del hoyo
+                                        binding.parHoyo.setText(it.get("par " + hoyo)
+                                                as String?) //Cambiamos el par del hoyo
+                                        binding.numHoyo.setText(hoyo.toString())
+                                        //Cambiamos el hoyo
                                     }
                                 }
                                 partido.setGolpe(
@@ -83,7 +97,8 @@ class TarjetaSimple : AppCompatActivity() {
                             var hcpHoyo = binding.handicapHoyo.text.toString().toInt()
                             partido.puntos(par, golpes,hcpHoyo, handicap,puntos)
                             puntos = partido.getPuntos()
-                            if(hoyo == 18){//Cuando lleguemos al último hoyo pasamos al resumen del partido
+                            /*Si estamos en el último hoyo pasaremos al resumen del partido*/
+                            if(hoyo == 18){
                                 partido.setResultado(puntos.toString(),idPartido)
                                 val i = Intent(this, ResumenTarjeta::class.java)
                                 i.putExtra("campoSeleccionado",campoSeleccionado)
@@ -129,12 +144,16 @@ class TarjetaSimple : AppCompatActivity() {
 
     /*--------------------------------------Funciones---------------------------------------------*/
 
-    //Almacenamos el hoyo para recuperarlo a lo largo del recorrido
+    /*Nos permite guardar algunos registros para que, si el usuario cambia de aplicación,
+    * cuando vuelva a esta, si se diese el caso de que la activity se ha reiniciado, pueda
+    * recuperar la información de la partida que estaba jugando*/
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("hoyo",hoyo)
     }
-    //Recuperamos el hoyo en el que estábamos
+    /*Nos permite guardar algunos registros para que, si el usuario cambia de aplicación,
+    * cuando vuelva a esta, si se diese el caso de que la activity se ha reiniciado, pueda
+    * recuperar la información de la partida que estaba jugando*/
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         hoyo = savedInstanceState.getInt("hoyo")

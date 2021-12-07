@@ -90,8 +90,8 @@ class StatsCampos : AppCompatActivity() {
                     listaDocCampo.add(document.toString())//Añadimos cada documento que contiene
                     //el campo seleccionado
                     try {
-                        listaPuntosCampo.add((document.get("resultado") as String).toInt())//Añadimos los
-                        //puntos de cada partido en el campo seleccionado
+                        //Añadimos los puntos de cada partido en el campo seleccionado
+                        listaPuntosCampo.add((document.get("resultado") as String).toInt())
                         totalDoc ++
                     }catch(e: Exception){
                         Log.d("sinPuntos", "Puntuación no encontrada")

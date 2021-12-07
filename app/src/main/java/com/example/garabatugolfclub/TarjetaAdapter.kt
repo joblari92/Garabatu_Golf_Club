@@ -9,11 +9,16 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class TarjetaAdapter(val listaPartidos: MutableList<Tarjetas> = mutableListOf<Tarjetas>()):RecyclerView.Adapter<TarjetaAdapter.TarjetaHolder>(){
+/*Con esta clase recuperamos los datos para cada tarjeta mostrada en el historial
+* desde la base de datos*/
+
+class TarjetaAdapter(val listaPartidos: MutableList<Tarjetas> = mutableListOf<Tarjetas>())
+    :RecyclerView.Adapter<TarjetaAdapter.TarjetaHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarjetaHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TarjetaHolder(layoutInflater.inflate(R.layout.item_tarjetas, parent,false))
+        return TarjetaHolder(layoutInflater.inflate(R.layout.item_tarjetas,
+            parent,false))
     }
 
     override fun onBindViewHolder(holder: TarjetaHolder, position: Int) {

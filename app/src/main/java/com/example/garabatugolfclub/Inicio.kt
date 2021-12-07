@@ -23,12 +23,19 @@ import com.google.firebase.ktx.Firebase
 class Inicio : AppCompatActivity() {
     private lateinit var binding: ActivityInicioBinding
 
-    /*VARIABLES*/
+    /*----------------------------------VARIABLES-------------------------------------------------*/
+
     val usuario = Usuario(Firebase.auth.currentUser?.email.toString())
     val campos = Campos(Firebase.auth.currentUser?.email.toString())
     val PERMISSION_ID = 42
 
+    /*----------------------------------onCreate--------------------------------------------------*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        /*Solicitamos permisos para el uso del GPS en caso de que el usuario utilice la tarjeta
+        * detallada y así poder registrar sus golpes*/
+
         requestPermissions()
 
         setTheme(R.style.Theme_GarabatuGolfClub)
@@ -38,12 +45,12 @@ class Inicio : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        /*Botón para mostrar la cuenta que inició sesión y poder cerrarla*/
         binding.botonUsuario.setOnClickListener {
-
             PopupUsuario()
-
         }
 
+        /*Iniciamos nueva partida y navegamos a la actívity SeleccionTarjeta*/
         binding.botonNuevaPartida.setOnClickListener {
 
             val i = Intent(this, SeleccionTarjeta::class.java)
@@ -59,7 +66,7 @@ class Inicio : AppCompatActivity() {
             campos.crearCampos()
         }
 
-        //---------------------------Funciones barra de menú----------------------------------------
+        /*---------------------------Funciones barra de menú--------------------------------------*/
 
 
         //Botón Historial
@@ -77,11 +84,12 @@ class Inicio : AppCompatActivity() {
 
     /*--------------------------------------Funciones---------------------------------------------*/
 
-
+    /*Solicitamos permisos para la localización GPS*/
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION),
             PERMISSION_ID
         )
     }

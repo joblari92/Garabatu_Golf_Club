@@ -22,37 +22,33 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
+
+    /*-------------------------------------Variables----------------------------------------------*/
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private val GOOGLE_SIGN_IN = 100
     private val callbackManager = CallbackManager.Factory.create()
 
+    /*-------------------------------------onCreate-----------------------------------------------*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Thread.sleep(2000)
-        /*
-         * Dejamos un tiempo, aunque puede que
-         * no sea necesario,para que se muestre
-         * la Splashscreen antes de que se inicie
-         * la aplicación y después cambiamos
-         * al tema principal
-         * */
+
         setTheme(R.style.Theme_GarabatuGolfClub)
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        /*
-         * Utilizaremos el método viewBinding tanto en esta activity como
-         * en todas las que vayamos a crear.
-         */
+
 
         /*Inicializamos Firebase Auth*/
         auth = Firebase.auth
 
 
-        /*Acción al pulsar el botón REGISTRO*/
+        /*Acción al pulsar el botón REGISTRO. Se comprueba que el campo email contiene un @ y que
+        * el campo contraseña no está vacío*/
         binding.registro.setOnClickListener {
             if (binding.email.text.contains("@") && binding.password.text.isNotEmpty()){
                 createAccount(binding.email.text.toString(),binding.password.text.toString())
@@ -62,7 +58,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        /*Acción al pulsar el botón INICIO*/
+        /*Acción al pulsar el botón INICIO. Se comprueba que el campo email contiene un @ y que
+        * el campo contraseña no está vacío*/
         binding.inicio.setOnClickListener {
             if (binding.email.text.contains("@") && binding.password.text.isNotEmpty()){
                 signIn(binding.email.text.toString(),binding.password.text.toString())
@@ -146,25 +143,7 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-
-
     /*----------------------------------------FUNCIONES------------------------------------------*/
-
-
-    /*private fun reload() {
-        val i = Intent(this, Inicio::class.java)
-                    startActivity(i)
-    }*/
-
-    /*Comprobamos si el usuario ya ha iniciado sesión, de ser así
-         *cargamos la siguiente activity con la función reload*/
-    /*public override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            reload();
-        }
-    }*/
 
     private fun LaunchActivityInicio(){
         val i = Intent(this,Inicio::class.java)
@@ -246,25 +225,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
-    /*Utilizamos esta función para obtener el hash que nos
-     *permita iniciar sesión con Facebook, pudiendo encontrarlo en el Logcat
-
-    fun generateFBKey () {
-        try {
-            val info = packageManager.getPackageInfo (
-                "com.example.garabatugolfclub",
-                PackageManager.GET_SIGNATURES
-            )
-            for (signature in info.signatures) {
-                val md: MessageDigest = MessageDigest.getInstance ("SHA")
-                md.update (signature.toByteArray ())
-                Log.d ("KeyHash:", Base64.encodeToString (md.digest (), Base64.DEFAULT))
-            }
-        } catch (e: PackageManager.NameNotFoundException) {
-        } catch (e: NoSuchAlgorithmException) {
-        }
-    }*/
-
 }

@@ -26,6 +26,9 @@ import com.google.firebase.ktx.Firebase
 import io.grpc.InternalChannelz.id
 
 class TarjetaAvanzada : AppCompatActivity() {
+
+    /*----------------------------------------Variables-------------------------------------------*/
+
     private lateinit var binding: ActivityTarjetaAvanzadaBinding
 
     //VARIABLES GPS
@@ -46,6 +49,8 @@ class TarjetaAvanzada : AppCompatActivity() {
     var totalGolpes = 0
     val golpe = Golpes(usuario)
 
+    /*-----------------------------------------onCreate-------------------------------------------*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GarabatuGolfClub)
 
@@ -54,12 +59,10 @@ class TarjetaAvanzada : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val campoSeleccionado = intent.getStringExtra("campoSeleccionado")//Recuperamos nombre del campo
-        // de la activity anterior
-        val idPartido = intent.getStringExtra("idPartido") //Recuperamos el ID del partido que se está
-        //jugando para almacenar los resultados
-        val handicap = intent.getIntExtra("handicap",0)//Recuperamos el Handicap indicado por el
-        //jugador
+        /*Recuperamos las variables enviadas desde la activity anterior*/
+        val campoSeleccionado = intent.getStringExtra("campoSeleccionado")
+        val idPartido = intent.getStringExtra("idPartido")
+        val handicap = intent.getIntExtra("handicap",0)
 
         //GPS
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -67,19 +70,15 @@ class TarjetaAvanzada : AppCompatActivity() {
         if(startPoint.latitude != 0.0 && startPoint.longitude != 0.0){
             binding.botonGolpe.isEnabled = false
         }
-        //Lanzamos la función gps una primera vez para que el usuario acepte o rechace los permisos
-        //getLastLocation()
-        //Log.d("gps","Latitud: " + latitud + " Longitud: " + longitud)
 
 
-        binding.nombreCampo.setText(campoSeleccionado) //Indicamos el nombre del campo
-        /*binding.golpes.setText(totalGolpes.toString())
-        binding.numHoyo.setText(hoyo.toString())*/
+        binding.nombreCampo.setText(campoSeleccionado)
 
         //Recuperamos el par y handicap del hoyo 1 en el campo que seleccionamos
         if (idPartido != null && campoSeleccionado != null) {
             db.collection("usuarios").document(usuario)
-                .collection("campos").document(campoSeleccionado).get().addOnSuccessListener {
+                .collection("campos").document(campoSeleccionado).get()
+                .addOnSuccessListener {
                     binding.handicapHoyo.setText(it.get("hcap " + hoyo) as String?)
                     binding.parHoyo.setText(it.get("par " + hoyo) as String?)
                     binding.golpes.setText(totalGolpes.toString())
@@ -94,21 +93,34 @@ class TarjetaAvanzada : AppCompatActivity() {
 
         //Pasamos de hoyo
         binding.botonSiguiente.setOnClickListener {
+            /*Comprobamos que haya golpes registrados*/
             if(binding.golpes.text.isNotEmpty()) {
+                /*Comprobamos que todavía no se haya acabado el recorrido*/
                 if (hoyo <= 18) {
+                    /*Comprobamos que se haya recuperado la información de la activity anterior*/
                     if (idPartido != null && campoSeleccionado != null) {
+                        /*Creamos un alert que haga que el usuario tenga que confirmar que
+                        * quiere pasar de hoyo*/
                         val builder = AlertDialog.Builder(this)
                         builder.setTitle("SIGUIENTE HOYO")
                         builder.setMessage("¿Continuar al siguiente hoyo?")
+                        /*Cuando confirme, registraremos el resultado del hoyo y pasaremos
+                        * al siguiente*/
                         builder.setPositiveButton("ACEPTAR", DialogInterface.OnClickListener{
                                 dialog,which->
                             db.collection("usuarios").document(usuario)
                                 .collection("campos").document(campoSeleccionado).get()
                                 .addOnSuccessListener {
                                     if (hoyo <=18) {
-                                        binding.handicapHoyo.setText(it.get("hcap " + hoyo) as String?) //Cambiamos el handicap del hoyo
-                                        binding.parHoyo.setText(it.get("par " + hoyo) as String?) //Cambiamos el par del hoyo
-                                        binding.numHoyo.setText(hoyo.toString()) //Cambiamos el hoyo
+                                        binding.handicapHoyo
+                                            .setText(it.get("hcap " + hoyo) as String?)
+                                        //Cambiamos el handicap del hoyo
+                                        binding.parHoyo
+                                            .setText(it.get("par " + hoyo) as String?)
+                                        //Cambiamos el par del hoyo
+                                        binding.numHoyo
+                                            .setText(hoyo.toString())
+                                        //Cambiamos el hoyo
                                     }
                                 }
                             partido.setGolpe(
@@ -122,7 +134,8 @@ class TarjetaAvanzada : AppCompatActivity() {
                             var hcpHoyo = binding.handicapHoyo.text.toString().toInt()
                             partido.puntos(par, golpes,hcpHoyo, handicap,puntos)
                             puntos = partido.getPuntos()
-                            if(hoyo == 18){//Cuando lleguemos al último hoyo pasamos al resumen del partido
+                            /*Si estamos en el último hoyo pasaremos al resumen del partido*/
+                            if(hoyo == 18){
                                 partido.setResultado(puntos.toString(),idPartido)
                                 val i = Intent(this, ResumenTarjeta::class.java)
                                 i.putExtra("campoSeleccionado",campoSeleccionado)
@@ -166,34 +179,46 @@ class TarjetaAvanzada : AppCompatActivity() {
             builder.show()
         }
 
-        //lugar del GOLPE
+        /*Registramos el lugar en el que se ejecuta el golpe. Solicitamos que se pulse dos veces,
+        * por un lado para que el usuario no registre coordenadas erroneas, y por otro porque
+        * al pulsar una sola vez no guardaba los registros correctamente*/
         binding.botonGolpe.setOnClickListener {
             val dropdown = binding.autoCompleteTextView.text
             if (dropdown.isNotEmpty()) {//Primero deberemos seleccionar un palo del listado
                 getLastLocationA()
-                Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: " + startPoint.longitude)
-                Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: " + endPoint.longitude)
+                Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: "
+                        + startPoint.longitude)
+                Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: "
+                        + endPoint.longitude)
                 endPoint.latitude = 0.0
                 endPoint.longitude = 0.0
                 if(startPoint.latitude != 0.0 && startPoint.longitude != 0.0){
                     binding.botonGolpe.isEnabled = false
                 }else{
-                    Toast.makeText(baseContext,"Click de nuevo para confirmar",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext,"Click de nuevo para confirmar",
+                        Toast.LENGTH_SHORT).show()
                 }
             }else{
-                Toast.makeText(baseContext, "Seleccione un palo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "Seleccione un palo",
+                    Toast.LENGTH_SHORT).show()
             }
         }
 
-        //DESTINO del golpe
+        /*Registramos el lugar en el que aterriza la bola. Solicitamos que se pulse dos veces,
+        * por un lado para que el usuario no registre coordenadas erroneas, y por otro porque
+        * al pulsar una sola vez no guardaba los registros correctamente*/
         binding.botonDestino.setOnClickListener {
             val palo = binding.autoCompleteTextView.text
-            if(binding.botonGolpe.isEnabled == true){//Primero deberá registrarse el punto de golpeo de la bola
-                Toast.makeText(baseContext, "Registre primero el golpe", Toast.LENGTH_SHORT).show()
+            /*Primero deberá registrarse el punto de golpeo de la bola*/
+            if(binding.botonGolpe.isEnabled == true){
+                Toast.makeText(baseContext, "Registre primero el golpe",
+                    Toast.LENGTH_SHORT).show()
             }else {
                 getLastLocationB()
-                Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: " + startPoint.longitude)
-                Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: " + endPoint.longitude)
+                Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: "
+                        + startPoint.longitude)
+                Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: "
+                        + endPoint.longitude)
                 if(endPoint.latitude != 0.0 && endPoint.longitude != 0.0) {
                     val distance: Float = startPoint.distanceTo(endPoint)
                     binding.distancia.setText(Math.round(distance).toString() + " metros")
@@ -208,10 +233,13 @@ class TarjetaAvanzada : AppCompatActivity() {
                     )
                     startPoint.latitude = 0.0
                     startPoint.longitude = 0.0
-                    Log.d("gps", "spLatitud: " + startPoint.latitude + " Longitud: " + startPoint.longitude)
-                    Log.d("gps", "epLatitud: " + endPoint.latitude + " Longitud: " + endPoint.longitude)
+                    Log.d("gps", "spLatitud: " + startPoint.latitude +
+                            " Longitud: " + startPoint.longitude)
+                    Log.d("gps", "epLatitud: " + endPoint.latitude +
+                            " Longitud: " + endPoint.longitude)
                 }else{
-                    Toast.makeText(baseContext,"Click de nuevo para confirmar",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext,"Click de nuevo para confirmar",
+                        Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -221,6 +249,9 @@ class TarjetaAvanzada : AppCompatActivity() {
 
     /*----------------------------------------Funciones-------------------------------------------*/
 
+    /*Nos permite guardar algunos registros para que, si el usuario cambia de aplicación,
+    * cuando vuelva a esta, si se diese el caso de que la activity se ha reiniciado, pueda
+    * recuperar la información de la partida que estaba jugando*/
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //binding.botonGolpe.isEnabled = false
@@ -233,6 +264,9 @@ class TarjetaAvanzada : AppCompatActivity() {
         + " spLatitude " + startPoint.latitude + " spLongitude " + startPoint.longitude)
     }
 
+    /*Nos permite guardar algunos registros para que, si el usuario cambia de aplicación,
+    * cuando vuelva a esta, si se diese el caso de que la activity se ha reiniciado, pueda
+    * recuperar la información de la partida que estaba jugando*/
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         hoyo = savedInstanceState.getInt("hoyo")
@@ -256,7 +290,8 @@ class TarjetaAvanzada : AppCompatActivity() {
                     .collection("partidos").document(idPressedBack).delete()
             }
         }else{
-            Toast.makeText(this,"Pulsa atrás otra vez para salir", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Pulsa atrás otra vez para salir",
+                Toast.LENGTH_SHORT).show()
         }
         backPressedTime = System.currentTimeMillis()
     }
@@ -337,8 +372,10 @@ class TarjetaAvanzada : AppCompatActivity() {
     }
 
     private fun isLocationEnabled(): Boolean {
-        var locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+        var locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE)
+                as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
     }
@@ -361,19 +398,17 @@ class TarjetaAvanzada : AppCompatActivity() {
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION),
             PERMISSION_ID
         )
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
+                                            grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        /*if (requestCode == PERMISSION_ID) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                getLastLocation()
-            }
-        }*/
+
     }
 
 }

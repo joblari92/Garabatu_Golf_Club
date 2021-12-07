@@ -22,6 +22,7 @@ class Historial : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     var listaPartidos: MutableList<Tarjetas> = mutableListOf()
 
+    /*------------------------------------onCreate------------------------------------------------*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GarabatuGolfClub)
@@ -49,6 +50,8 @@ class Historial : AppCompatActivity() {
 
     /*---------------------------------------Funciones--------------------------------------------*/
 
+    /*Recuperamos los valores de cada partido que vamos a mostrar en las tarjetas, asegurándonos
+    * de que ninguno esté vacío*/
     fun recuperarInformacion() {
         db.collection("usuarios").document(usuario).collection("partidos")
             .get().addOnSuccessListener { documents ->
@@ -76,6 +79,7 @@ class Historial : AppCompatActivity() {
 
     }
 
+    /*Inicializamos el recyclerView*/
     fun initRecycler(){
         try {
 

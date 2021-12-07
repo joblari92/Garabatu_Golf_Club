@@ -14,14 +14,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class ResumenTarjeta : AppCompatActivity() {
+
+    /*--------------------------------------Variables---------------------------------------------*/
+
     private lateinit var binding: ActivityResumenTarjetaBinding
     val usuario = Firebase.auth.currentUser?.email.toString()
     val db = FirebaseFirestore.getInstance()
-    val partido = Partidos(usuario)
-    var hoyo = 1
+
     //Variable para evitar salir de la activity directamente
     private var backPressedTime = 0L
 
+    /*--------------------------------------onCreate----------------------------------------------*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GarabatuGolfClub)
@@ -31,13 +34,13 @@ class ResumenTarjeta : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val campoSeleccionado = intent.getStringExtra("campoSeleccionado")//Recuperamos nombre del campo
-        // de la activity anterior
-        val idPartido = intent.getStringExtra("idPartido") //Recuperamos el ID del partido que se está
-        //jugando
+        /*Recuperamos las variables enviadas desde la activity anterior*/
+        val campoSeleccionado = intent.getStringExtra("campoSeleccionado")
+        val idPartido = intent.getStringExtra("idPartido")
 
         binding.campoResumen.setText(campoSeleccionado)
 
+        /*Recuperamos los golpes dados en cada hoyo del recorrido*/
         if (idPartido != null) {
             db.collection("usuarios").document(usuario)
                 .collection("partidos").document(idPartido).get()

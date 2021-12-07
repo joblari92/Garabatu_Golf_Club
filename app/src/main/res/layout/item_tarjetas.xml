@@ -4,7 +4,7 @@
     android:layout_height="100dp"
     android:orientation="horizontal"
     android:layout_margin="20dp"
-    android:background="@color/primaryLightColor">
+    android:background="@color/secondaryLightColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,8 @@
             android:textStyle="bold"
             android:text="Campo"
             android:gravity="center"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,14 +41,16 @@
                     android:textStyle="bold"
                     android:text="Fecha"
                     android:gravity="center"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/fechaTarjeta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
                     android:text="Campo"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
             <LinearLayout
@@ -63,14 +66,16 @@
                     android:textStyle="bold"
                     android:text="Hora"
                     android:gravity="center"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/horaTarjeta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
                     android:text="Campo"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textColor="@color/black"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -90,7 +95,8 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/puntosTarjeta"
@@ -98,7 +104,8 @@
             android:layout_height="match_parent"
             android:text="0"
             android:gravity="center"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:textColor="@color/black"/>
 
 
     </LinearLayout>

@@ -11,6 +11,8 @@ import kotlin.io.path.createTempDirectory
 
 class Partidos(val email: String) {
 
+    /*---------------------------------------Variables--------------------------------------------*/
+
     private val db = FirebaseFirestore.getInstance() //Instancia de la base de datos
 
     val date = Calendar.getInstance()
@@ -20,7 +22,7 @@ class Partidos(val email: String) {
     val id = currentDate + hora
     var puntos = 0
 
-
+    /*Creamos el partido en curso en la base de datos*/
     fun crearPartido(campo:String,handicap:String){
         db.collection("usuarios").document(email)
             .collection("partidos").document(id)
@@ -38,7 +40,7 @@ class Partidos(val email: String) {
         return id
     }
 
-    //Almacenamos cada golpe dado
+    //Almacenamos total golpes dados en el hoyo
     fun setGolpe(golpes:String,hoyo:String,id:String){
         var golpesHoyo: String = "golpes " + hoyo
         db.collection("usuarios").document(email)
@@ -58,11 +60,14 @@ class Partidos(val email: String) {
             .addOnFailureListener { e -> Log.w("TAG", "Error updating document", e) }
     }
 
+    /*Devolvemos el total de puntos que vamos almacenando*/
     @JvmName("getPuntos1")
     fun getPuntos(): Int{
         return puntos
     }
 
+    /*Vamos almacenando el total de puntos acumulados a lo largo del recorrido con cada hoyo
+    * que jugamos. La puntuación se calcula teniendo en cuenta el handicap del jugador*/
     fun puntos(par:Int,golpes:Int,hcpHoyo:Int,handicap:Int,Puntos:Int) {
         puntos = Puntos
         var gNetos: Int
@@ -131,7 +136,6 @@ class Partidos(val email: String) {
                 }
             }
         }
-        //Log.d("puntos","puntos " + puntos.toString() + "golpes" + golpes.toString())
     }
 
 }

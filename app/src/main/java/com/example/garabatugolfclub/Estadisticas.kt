@@ -7,7 +7,13 @@ import com.example.garabatugolfclub.databinding.ActivityEstadisticasBinding
 import com.example.garabatugolfclub.databinding.ActivityStatsCamposBinding
 
 class Estadisticas : AppCompatActivity() {
+
+    /*-----------------------------------------Variables------------------------------------------*/
+
     private lateinit var binding: ActivityEstadisticasBinding
+
+    /*------------------------------------------onCreate------------------------------------------*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_GarabatuGolfClub)
         binding = ActivityEstadisticasBinding.inflate(layoutInflater)
