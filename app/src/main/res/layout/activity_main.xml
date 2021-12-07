@@ -144,6 +144,16 @@
             android:textSize="30dp"
             />
 
+        <Button
+            android:id="@+id/recuperarPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recuperar contraseña"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:backgroundTint="@color/primaryLightColor"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"/>
+
 
     </LinearLayout>
 

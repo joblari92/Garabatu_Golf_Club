@@ -133,6 +133,18 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        binding.recuperarPassword.setOnClickListener {
+            val emailAddress = binding.email.text.toString()
+
+            Firebase.auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(baseContext,"Correo de recuperación enviado",Toast.LENGTH_SHORT).show()
+                        Log.d("correo", "Email sent.")
+                    }
+                }
+        }
+
 
 
 
