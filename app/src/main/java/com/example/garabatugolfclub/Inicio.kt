@@ -1,5 +1,6 @@
 package com.example.garabatugolfclub
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -9,6 +10,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import com.example.garabatugolfclub.databinding.ActivityInicioBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.dialog.MaterialDialogs
@@ -21,12 +23,21 @@ import com.google.firebase.ktx.Firebase
 class Inicio : AppCompatActivity() {
     private lateinit var binding: ActivityInicioBinding
 
-    /*Instanciamos la clase usuario*/
+    /*----------------------------------VARIABLES-------------------------------------------------*/
+
     val usuario = Usuario(Firebase.auth.currentUser?.email.toString())
     val campos = Campos(Firebase.auth.currentUser?.email.toString())
+    val PERMISSION_ID = 42
 
+    /*----------------------------------onCreate--------------------------------------------------*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        /*Solicitamos permisos para el uso del GPS en caso de que el usuario utilice la tarjeta
+        * detallada y así poder registrar sus golpes*/
+
+        requestPermissions()
+
         setTheme(R.style.Theme_GarabatuGolfClub)
 
         super.onCreate(savedInstanceState)
@@ -34,12 +45,12 @@ class Inicio : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        /*Botón para mostrar la cuenta que inició sesión y poder cerrarla*/
         binding.botonUsuario.setOnClickListener {
-
             PopupUsuario()
-
         }
 
+        /*Iniciamos nueva partida y navegamos a la actívity SeleccionTarjeta*/
         binding.botonNuevaPartida.setOnClickListener {
 
             val i = Intent(this, SeleccionTarjeta::class.java)
@@ -55,7 +66,7 @@ class Inicio : AppCompatActivity() {
             campos.crearCampos()
         }
 
-        //---------------------------Funciones barra de menú----------------------------------------
+        /*---------------------------Funciones barra de menú--------------------------------------*/
 
 
         //Botón Historial
@@ -71,7 +82,17 @@ class Inicio : AppCompatActivity() {
 
     }
 
+    /*--------------------------------------Funciones---------------------------------------------*/
 
+    /*Solicitamos permisos para la localización GPS*/
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_ID
+        )
+    }
 
     override fun onDestroy() {
 

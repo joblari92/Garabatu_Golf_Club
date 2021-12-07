@@ -11,6 +11,8 @@ import kotlin.io.path.createTempDirectory
 
 class Partidos(val email: String) {
 
+    /*---------------------------------------Variables--------------------------------------------*/
+
     private val db = FirebaseFirestore.getInstance() //Instancia de la base de datos
 
     val date = Calendar.getInstance()
@@ -18,8 +20,9 @@ class Partidos(val email: String) {
     val simpleDateFormat = SimpleDateFormat("hh:mm:ss")
     val hora = simpleDateFormat.format(date.time) //obtenemos la hora actual
     val id = currentDate + hora
+    var puntos = 0
 
-
+    /*Creamos el partido en curso en la base de datos*/
     fun crearPartido(campo:String,handicap:String){
         db.collection("usuarios").document(email)
             .collection("partidos").document(id)
@@ -37,7 +40,7 @@ class Partidos(val email: String) {
         return id
     }
 
-    //Almacenamos cada golpe dado
+    //Almacenamos total golpes dados en el hoyo
     fun setGolpe(golpes:String,hoyo:String,id:String){
         var golpesHoyo: String = "golpes " + hoyo
         db.collection("usuarios").document(email)
@@ -55,6 +58,84 @@ class Partidos(val email: String) {
             .update("resultado",puntos)
             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully updated!") }
             .addOnFailureListener { e -> Log.w("TAG", "Error updating document", e) }
+    }
+
+    /*Devolvemos el total de puntos que vamos almacenando*/
+    @JvmName("getPuntos1")
+    fun getPuntos(): Int{
+        return puntos
+    }
+
+    /*Vamos almacenando el total de puntos acumulados a lo largo del recorrido con cada hoyo
+    * que jugamos. La puntuación se calcula teniendo en cuenta el handicap del jugador*/
+    fun puntos(par:Int,golpes:Int,hcpHoyo:Int,handicap:Int,Puntos:Int) {
+        puntos = Puntos
+        var gNetos: Int
+        if (handicap <= 18) {
+            if (hcpHoyo <= handicap) {
+                gNetos = golpes - 1
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            } else {
+                gNetos = golpes
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
+        } else {
+            if (hcpHoyo <= (handicap - 18)) {
+                gNetos = golpes - 2
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            } else {
+                gNetos = golpes - 1
+                if (par - gNetos == 0) {
+                    puntos += 2
+                } else if (par - gNetos == 1) {
+                    puntos += 3
+                } else if (par - gNetos == 2) {
+                    puntos += 4
+                } else if (par - gNetos == 3) {
+                    puntos += 5
+                } else if (par - gNetos == 4) {
+                    puntos += 6
+                } else if (par - gNetos == -1) {
+                    puntos += 1
+                }
+            }
+        }
     }
 
 }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:layout_margin="20dp"
+    android:background="@color/secondaryLightColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/campoTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Campo"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/textFechaTarjeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="Fecha"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/fechaTarjeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="Campo"
+                    android:gravity="center"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/textHoraTarjeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="Hora"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/horaTarjeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="Campo"
+                    android:gravity="center"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textPuntos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puntos"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/puntosTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:textColor="@color/black"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
